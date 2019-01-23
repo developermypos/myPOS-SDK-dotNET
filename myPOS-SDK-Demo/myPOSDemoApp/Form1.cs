@@ -1,16 +1,11 @@
 ﻿using myPOS;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO.Ports;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace myPOSDemoApp
 {
@@ -18,6 +13,9 @@ namespace myPOSDemoApp
     {
         double Amount;
         Currencies cur;
+        String PAN = "";
+        String ExpiryDate = "";
+        String strPreauthCode = "";
         Version version = Assembly.GetEntryAssembly().GetName().Version;
 
         myPOSTerminal t = new myPOSTerminal();
@@ -27,6 +25,7 @@ namespace myPOSDemoApp
             
             t.ProcessingFinished += ProcessResult;
             t.Log += AddLog;
+            t.SetLanguage(Language.English);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,9 +35,14 @@ namespace myPOSDemoApp
             cmbCurrency.SelectedItem = Currencies.EUR;
             cmbReceiptMode.DataSource = Enum.GetValues(typeof(ReceiptMode));
             cmbReceiptMode.SelectedItem = ReceiptMode.NotConfugred;
+            cmbReferenceType.DataSource = Enum.GetValues(typeof(ReferenceNumberType));
+            cmbReferenceType.SelectedItem = ReferenceNumberType.None;
 
-            this.Text = "TestApp Version " + version.ToString();
-            AddLog("TestApp Version: " + version.ToString());
+            cmbLanguage.DataSource = Enum.GetValues(typeof(Language));
+            cmbLanguage.SelectedItem = Language.English;
+
+            this.Text = "myPOSDemoApp Version " + version.ToString();
+            AddLog("myPOSDemoApp Version: " + version.ToString());
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -66,6 +70,7 @@ namespace myPOSDemoApp
                 sb.AppendFormat("Currency: {0}\r\n", r.TranData.Currency.ToString());
                 sb.AppendFormat("Approval: {0}\r\n", r.TranData.Approval);
                 sb.AppendFormat("Auth code: {0}\r\n", r.TranData.AuthCode);
+                sb.AppendFormat("Preauth Code: {0}\r\n", r.TranData.PreauthCode);
                 sb.AppendFormat("RRN: {0}\r\n", r.TranData.RRN);
                 sb.AppendFormat("Date: {0}\r\n", r.TranData.TransactionDate.ToString("dd.MM.yyyy"));
                 sb.AppendFormat("Time: {0}\r\n", r.TranData.TransactionDate.ToString("HH:mm:ss"));
@@ -115,6 +120,20 @@ namespace myPOSDemoApp
         {
             cur = (Currencies)cmbCurrency.SelectedItem;
             return true;
+        }
+
+        private bool ParseMoTo()
+        {
+            PAN = txtPan.Text;
+            ExpiryDate = txtExpiryDate.Text;
+            return PAN.Length > 0;
+        }
+
+        private bool ParsePreauthCode()
+        {
+            strPreauthCode = txtPreauthCode.Text;
+            Match match = Regex.Match(strPreauthCode, @"[0-9]{6}");
+            return match.Success;
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -172,6 +191,7 @@ namespace myPOSDemoApp
             }
             else
             {
+                t.SetPassword(txtPassword.Text);
                 RequestResult r = t.Refund(Amount, cur, txtReference.Text);
                 switch (r)
                 {
@@ -201,6 +221,7 @@ namespace myPOSDemoApp
 
         private void btnReversal_Click(object sender, EventArgs e)
         {
+            t.SetPassword(txtPassword.Text);
             RequestResult r = t.Reversal(txtReference.Text);
             switch (r)
             {
@@ -263,6 +284,346 @@ namespace myPOSDemoApp
         private void btnPrintExternal_Click(object sender, EventArgs e)
         {
             t.PrintExternal(txtPrintData.Text);
+        }
+
+        private void btnPreauth_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.Preauthorization(Amount, cur, txtReference.Text);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnPreauthComplete_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParsePreauthCode())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.CompletePreauth(strPreauthCode, Amount);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnPreauthCancel_Click(object sender, EventArgs e)
+        {
+            if (!ParsePreauthCode())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.CancelPreauth(strPreauthCode);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnMotoPurchase_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency() || !ParseMoTo())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                t.SetPassword(txtPassword.Text);
+                RequestResult r = t.MoToPurchase(Amount, cur, PAN, ExpiryDate, txtReference.Text);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnMotoRefund_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency() || !ParseMoTo())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                t.SetPassword(txtPassword.Text);
+                RequestResult r = t.MoToRefund(Amount, cur, PAN, ExpiryDate, txtReference.Text);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnMotoPreauth_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency() || !ParseMoTo())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                t.SetPassword(txtPassword.Text);
+                RequestResult r = t.MoToPreauthorization(Amount, cur, PAN, ExpiryDate, txtReference.Text);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnPing_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.Ping();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnReboot_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.Reboot();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnGiftActivation_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.GiftcardActivation(Amount, cur);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnGiftDeactivation_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.GiftcardDeactivation();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnCheckBalance_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.GiftcardCheckBalance();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnBigPurchase_Click(object sender, EventArgs e)
+        {
+            double Tip = 0;
+            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+
+
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.Purchase(Amount, Tip, cur, (ReferenceNumberType) cmbReferenceType.SelectedItem, txtReferenceNumber.Text, txtOperatorCode.Text);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPaymentRequest_Click(object sender, EventArgs e)
+        {
+            int days = 0;
+            Int32.TryParse(txtDays.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out days);
+
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.SendPaymentRequest(Amount, cur, txtGSM.Text, txtEMail.Text, txtRecipient.Text, txtReason.Text, days);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            t.SetLanguage((Language)cmbLanguage.SelectedItem);
+        }
+
+        private void btnCheckCard_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.CheckCard();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnOriginalCredit_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.OriginalCredit(Amount, cur);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnSendLog_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.SendLog();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnVendingPurchase_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.VendingPurchase(Amount, cur);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnVendingStop_Click(object sender, EventArgs e)
+        {
+            t.VendingStop();
         }
     }
 }

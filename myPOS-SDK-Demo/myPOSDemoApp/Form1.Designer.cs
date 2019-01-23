@@ -53,6 +53,51 @@
             this.txtReference = new System.Windows.Forms.TextBox();
             this.txtPrintData = new System.Windows.Forms.TextBox();
             this.btnPrintExternal = new System.Windows.Forms.Button();
+            this.btnPreauth = new System.Windows.Forms.Button();
+            this.txtPreauthCode = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnPreauthComplete = new System.Windows.Forms.Button();
+            this.btnPreauthCancel = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPan = new System.Windows.Forms.TextBox();
+            this.txtExpiryDate = new System.Windows.Forms.TextBox();
+            this.btnMotoPurchase = new System.Windows.Forms.Button();
+            this.btnMotoRefund = new System.Windows.Forms.Button();
+            this.btnMotoPreauth = new System.Windows.Forms.Button();
+            this.btnPing = new System.Windows.Forms.Button();
+            this.btnReboot = new System.Windows.Forms.Button();
+            this.btnGiftActivation = new System.Windows.Forms.Button();
+            this.btnGiftDeactivation = new System.Windows.Forms.Button();
+            this.btnCheckBalance = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtTipAmount = new System.Windows.Forms.TextBox();
+            this.cmbReferenceType = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtReferenceNumber = new System.Windows.Forms.TextBox();
+            this.btnBigPurchase = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtOperatorCode = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtGSM = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtEMail = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtRecipient = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtDays = new System.Windows.Forms.TextBox();
+            this.btnPaymentRequest = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtReason = new System.Windows.Forms.TextBox();
+            this.cmbLanguage = new System.Windows.Forms.ComboBox();
+            this.btnCheckCard = new System.Windows.Forms.Button();
+            this.btnOriginalCredit = new System.Windows.Forms.Button();
+            this.btnSendLog = new System.Windows.Forms.Button();
+            this.btnVendingPurchase = new System.Windows.Forms.Button();
+            this.btnVendingStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbComPorts
@@ -85,7 +130,7 @@
             // 
             // btnPurchase
             // 
-            this.btnPurchase.Location = new System.Drawing.Point(24, 244);
+            this.btnPurchase.Location = new System.Drawing.Point(24, 295);
             this.btnPurchase.Name = "btnPurchase";
             this.btnPurchase.Size = new System.Drawing.Size(75, 23);
             this.btnPurchase.TabIndex = 3;
@@ -99,17 +144,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLog.BackColor = System.Drawing.SystemColors.Window;
-            this.txtLog.Location = new System.Drawing.Point(12, 415);
+            this.txtLog.Location = new System.Drawing.Point(12, 424);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(895, 356);
+            this.txtLog.Size = new System.Drawing.Size(1262, 555);
             this.txtLog.TabIndex = 4;
             // 
             // btnAbort
             // 
-            this.btnAbort.Location = new System.Drawing.Point(24, 302);
+            this.btnAbort.Location = new System.Drawing.Point(24, 395);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(75, 23);
             this.btnAbort.TabIndex = 6;
@@ -158,7 +203,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 166);
+            this.label3.Location = new System.Drawing.Point(21, 188);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 12;
@@ -175,14 +220,14 @@
             // 
             this.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCurrency.FormattingEnabled = true;
-            this.cmbCurrency.Location = new System.Drawing.Point(114, 163);
+            this.cmbCurrency.Location = new System.Drawing.Point(114, 185);
             this.cmbCurrency.Name = "cmbCurrency";
             this.cmbCurrency.Size = new System.Drawing.Size(164, 21);
             this.cmbCurrency.TabIndex = 14;
             // 
             // btnRefund
             // 
-            this.btnRefund.Location = new System.Drawing.Point(114, 244);
+            this.btnRefund.Location = new System.Drawing.Point(114, 295);
             this.btnRefund.Name = "btnRefund";
             this.btnRefund.Size = new System.Drawing.Size(75, 23);
             this.btnRefund.TabIndex = 15;
@@ -192,7 +237,7 @@
             // 
             // btnReversal
             // 
-            this.btnReversal.Location = new System.Drawing.Point(203, 244);
+            this.btnReversal.Location = new System.Drawing.Point(203, 295);
             this.btnReversal.Name = "btnReversal";
             this.btnReversal.Size = new System.Drawing.Size(75, 23);
             this.btnReversal.TabIndex = 16;
@@ -222,7 +267,7 @@
             // 
             // btnReprint
             // 
-            this.btnReprint.Location = new System.Drawing.Point(294, 244);
+            this.btnReprint.Location = new System.Drawing.Point(114, 395);
             this.btnReprint.Name = "btnReprint";
             this.btnReprint.Size = new System.Drawing.Size(117, 23);
             this.btnReprint.TabIndex = 18;
@@ -233,7 +278,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 104);
+            this.label4.Location = new System.Drawing.Point(21, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 19;
@@ -243,7 +288,7 @@
             // 
             this.cmbReceiptMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReceiptMode.FormattingEnabled = true;
-            this.cmbReceiptMode.Location = new System.Drawing.Point(114, 101);
+            this.cmbReceiptMode.Location = new System.Drawing.Point(114, 106);
             this.cmbReceiptMode.Name = "cmbReceiptMode";
             this.cmbReceiptMode.Size = new System.Drawing.Size(164, 21);
             this.cmbReceiptMode.TabIndex = 14;
@@ -252,7 +297,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 196);
+            this.label5.Location = new System.Drawing.Point(21, 218);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 21;
@@ -260,48 +305,498 @@
             // 
             // txtReference
             // 
-            this.txtReference.Location = new System.Drawing.Point(114, 193);
+            this.txtReference.Location = new System.Drawing.Point(114, 215);
             this.txtReference.Name = "txtReference";
             this.txtReference.Size = new System.Drawing.Size(164, 20);
             this.txtReference.TabIndex = 22;
             // 
             // txtPrintData
             // 
-            this.txtPrintData.Location = new System.Drawing.Point(512, 13);
+            this.txtPrintData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPrintData.Location = new System.Drawing.Point(961, 13);
             this.txtPrintData.Multiline = true;
             this.txtPrintData.Name = "txtPrintData";
-            this.txtPrintData.Size = new System.Drawing.Size(341, 254);
+            this.txtPrintData.Size = new System.Drawing.Size(313, 254);
             this.txtPrintData.TabIndex = 23;
             this.txtPrintData.Text = resources.GetString("txtPrintData.Text");
             // 
             // btnPrintExternal
             // 
-            this.btnPrintExternal.Location = new System.Drawing.Point(512, 302);
+            this.btnPrintExternal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrintExternal.Location = new System.Drawing.Point(961, 302);
             this.btnPrintExternal.Name = "btnPrintExternal";
-            this.btnPrintExternal.Size = new System.Drawing.Size(341, 23);
+            this.btnPrintExternal.Size = new System.Drawing.Size(313, 23);
             this.btnPrintExternal.TabIndex = 24;
             this.btnPrintExternal.Text = "Print external data";
             this.btnPrintExternal.UseVisualStyleBackColor = true;
             this.btnPrintExternal.Click += new System.EventHandler(this.btnPrintExternal_Click);
             // 
+            // btnPreauth
+            // 
+            this.btnPreauth.Location = new System.Drawing.Point(24, 325);
+            this.btnPreauth.Name = "btnPreauth";
+            this.btnPreauth.Size = new System.Drawing.Size(75, 23);
+            this.btnPreauth.TabIndex = 25;
+            this.btnPreauth.Text = "Preauth";
+            this.btnPreauth.UseVisualStyleBackColor = true;
+            this.btnPreauth.Click += new System.EventHandler(this.btnPreauth_Click);
+            // 
+            // txtPreauthCode
+            // 
+            this.txtPreauthCode.Location = new System.Drawing.Point(114, 241);
+            this.txtPreauthCode.Name = "txtPreauthCode";
+            this.txtPreauthCode.Size = new System.Drawing.Size(164, 20);
+            this.txtPreauthCode.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 244);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Preauth Code";
+            // 
+            // btnPreauthComplete
+            // 
+            this.btnPreauthComplete.Location = new System.Drawing.Point(114, 325);
+            this.btnPreauthComplete.Name = "btnPreauthComplete";
+            this.btnPreauthComplete.Size = new System.Drawing.Size(146, 23);
+            this.btnPreauthComplete.TabIndex = 26;
+            this.btnPreauthComplete.Text = "Preauth completion";
+            this.btnPreauthComplete.UseVisualStyleBackColor = true;
+            this.btnPreauthComplete.Click += new System.EventHandler(this.btnPreauthComplete_Click);
+            // 
+            // btnPreauthCancel
+            // 
+            this.btnPreauthCancel.Location = new System.Drawing.Point(266, 325);
+            this.btnPreauthCancel.Name = "btnPreauthCancel";
+            this.btnPreauthCancel.Size = new System.Drawing.Size(146, 23);
+            this.btnPreauthCancel.TabIndex = 27;
+            this.btnPreauthCancel.Text = "Preauth cancelation";
+            this.btnPreauthCancel.UseVisualStyleBackColor = true;
+            this.btnPreauthCancel.Click += new System.EventHandler(this.btnPreauthCancel_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(376, 109);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "PAN";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(376, 136);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "ExpiryDate (MMYY)";
+            // 
+            // txtPan
+            // 
+            this.txtPan.Location = new System.Drawing.Point(489, 107);
+            this.txtPan.Name = "txtPan";
+            this.txtPan.Size = new System.Drawing.Size(164, 20);
+            this.txtPan.TabIndex = 22;
+            // 
+            // txtExpiryDate
+            // 
+            this.txtExpiryDate.Location = new System.Drawing.Point(489, 133);
+            this.txtExpiryDate.Name = "txtExpiryDate";
+            this.txtExpiryDate.Size = new System.Drawing.Size(164, 20);
+            this.txtExpiryDate.TabIndex = 22;
+            // 
+            // btnMotoPurchase
+            // 
+            this.btnMotoPurchase.Location = new System.Drawing.Point(504, 295);
+            this.btnMotoPurchase.Name = "btnMotoPurchase";
+            this.btnMotoPurchase.Size = new System.Drawing.Size(149, 23);
+            this.btnMotoPurchase.TabIndex = 28;
+            this.btnMotoPurchase.Text = "Moto Purchase";
+            this.btnMotoPurchase.UseVisualStyleBackColor = true;
+            this.btnMotoPurchase.Click += new System.EventHandler(this.btnMotoPurchase_Click);
+            // 
+            // btnMotoRefund
+            // 
+            this.btnMotoRefund.Location = new System.Drawing.Point(504, 325);
+            this.btnMotoRefund.Name = "btnMotoRefund";
+            this.btnMotoRefund.Size = new System.Drawing.Size(149, 23);
+            this.btnMotoRefund.TabIndex = 28;
+            this.btnMotoRefund.Text = "Moto Refund";
+            this.btnMotoRefund.UseVisualStyleBackColor = true;
+            this.btnMotoRefund.Click += new System.EventHandler(this.btnMotoRefund_Click);
+            // 
+            // btnMotoPreauth
+            // 
+            this.btnMotoPreauth.Location = new System.Drawing.Point(504, 354);
+            this.btnMotoPreauth.Name = "btnMotoPreauth";
+            this.btnMotoPreauth.Size = new System.Drawing.Size(149, 23);
+            this.btnMotoPreauth.TabIndex = 28;
+            this.btnMotoPreauth.Text = "Moto Preauth";
+            this.btnMotoPreauth.UseVisualStyleBackColor = true;
+            this.btnMotoPreauth.Click += new System.EventHandler(this.btnMotoPreauth_Click);
+            // 
+            // btnPing
+            // 
+            this.btnPing.Location = new System.Drawing.Point(388, 56);
+            this.btnPing.Name = "btnPing";
+            this.btnPing.Size = new System.Drawing.Size(75, 23);
+            this.btnPing.TabIndex = 17;
+            this.btnPing.Text = "Ping";
+            this.btnPing.UseVisualStyleBackColor = true;
+            this.btnPing.Click += new System.EventHandler(this.btnPing_Click);
+            // 
+            // btnReboot
+            // 
+            this.btnReboot.Location = new System.Drawing.Point(489, 56);
+            this.btnReboot.Name = "btnReboot";
+            this.btnReboot.Size = new System.Drawing.Size(75, 23);
+            this.btnReboot.TabIndex = 29;
+            this.btnReboot.Text = "Reboot";
+            this.btnReboot.UseVisualStyleBackColor = true;
+            this.btnReboot.Click += new System.EventHandler(this.btnReboot_Click);
+            // 
+            // btnGiftActivation
+            // 
+            this.btnGiftActivation.Location = new System.Drawing.Point(24, 355);
+            this.btnGiftActivation.Name = "btnGiftActivation";
+            this.btnGiftActivation.Size = new System.Drawing.Size(122, 23);
+            this.btnGiftActivation.TabIndex = 30;
+            this.btnGiftActivation.Text = "Giftcard Activation";
+            this.btnGiftActivation.UseVisualStyleBackColor = true;
+            this.btnGiftActivation.Click += new System.EventHandler(this.btnGiftActivation_Click);
+            // 
+            // btnGiftDeactivation
+            // 
+            this.btnGiftDeactivation.Location = new System.Drawing.Point(156, 355);
+            this.btnGiftDeactivation.Name = "btnGiftDeactivation";
+            this.btnGiftDeactivation.Size = new System.Drawing.Size(122, 23);
+            this.btnGiftDeactivation.TabIndex = 30;
+            this.btnGiftDeactivation.Text = "Giftcard Deactivation";
+            this.btnGiftDeactivation.UseVisualStyleBackColor = true;
+            this.btnGiftDeactivation.Click += new System.EventHandler(this.btnGiftDeactivation_Click);
+            // 
+            // btnCheckBalance
+            // 
+            this.btnCheckBalance.Location = new System.Drawing.Point(289, 355);
+            this.btnCheckBalance.Name = "btnCheckBalance";
+            this.btnCheckBalance.Size = new System.Drawing.Size(122, 23);
+            this.btnCheckBalance.TabIndex = 30;
+            this.btnCheckBalance.Text = "Check Balance";
+            this.btnCheckBalance.UseVisualStyleBackColor = true;
+            this.btnCheckBalance.Click += new System.EventHandler(this.btnCheckBalance_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(21, 162);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Amount tip";
+            // 
+            // txtTipAmount
+            // 
+            this.txtTipAmount.Location = new System.Drawing.Point(114, 159);
+            this.txtTipAmount.Name = "txtTipAmount";
+            this.txtTipAmount.Size = new System.Drawing.Size(164, 20);
+            this.txtTipAmount.TabIndex = 13;
+            // 
+            // cmbReferenceType
+            // 
+            this.cmbReferenceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbReferenceType.FormattingEnabled = true;
+            this.cmbReferenceType.Location = new System.Drawing.Point(489, 159);
+            this.cmbReferenceType.Name = "cmbReferenceType";
+            this.cmbReferenceType.Size = new System.Drawing.Size(164, 21);
+            this.cmbReferenceType.TabIndex = 14;
+            this.cmbReferenceType.SelectedIndexChanged += new System.EventHandler(this.cmbCurrency_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(376, 162);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Reference type";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(376, 189);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(95, 13);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "Reference number";
+            // 
+            // txtReferenceNumber
+            // 
+            this.txtReferenceNumber.Location = new System.Drawing.Point(489, 186);
+            this.txtReferenceNumber.Name = "txtReferenceNumber";
+            this.txtReferenceNumber.Size = new System.Drawing.Size(164, 20);
+            this.txtReferenceNumber.TabIndex = 22;
+            // 
+            // btnBigPurchase
+            // 
+            this.btnBigPurchase.Location = new System.Drawing.Point(289, 296);
+            this.btnBigPurchase.Name = "btnBigPurchase";
+            this.btnBigPurchase.Size = new System.Drawing.Size(122, 23);
+            this.btnBigPurchase.TabIndex = 31;
+            this.btnBigPurchase.Text = "Purcase + Tip";
+            this.btnBigPurchase.UseVisualStyleBackColor = true;
+            this.btnBigPurchase.Click += new System.EventHandler(this.btnBigPurchase_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(376, 214);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 13);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Operator code";
+            // 
+            // txtOperatorCode
+            // 
+            this.txtOperatorCode.Location = new System.Drawing.Point(489, 211);
+            this.txtOperatorCode.Name = "txtOperatorCode";
+            this.txtOperatorCode.Size = new System.Drawing.Size(164, 20);
+            this.txtOperatorCode.TabIndex = 22;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(376, 240);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Password";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(489, 237);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(164, 20);
+            this.txtPassword.TabIndex = 22;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(668, 109);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "GSM";
+            // 
+            // txtGSM
+            // 
+            this.txtGSM.Location = new System.Drawing.Point(781, 106);
+            this.txtGSM.Name = "txtGSM";
+            this.txtGSM.Size = new System.Drawing.Size(164, 20);
+            this.txtGSM.TabIndex = 22;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(668, 136);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(33, 13);
+            this.label15.TabIndex = 21;
+            this.label15.Text = "EMail";
+            // 
+            // txtEMail
+            // 
+            this.txtEMail.Location = new System.Drawing.Point(781, 133);
+            this.txtEMail.Name = "txtEMail";
+            this.txtEMail.Size = new System.Drawing.Size(164, 20);
+            this.txtEMail.TabIndex = 22;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(668, 162);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(52, 13);
+            this.label16.TabIndex = 21;
+            this.label16.Text = "Recipient";
+            // 
+            // txtRecipient
+            // 
+            this.txtRecipient.Location = new System.Drawing.Point(781, 159);
+            this.txtRecipient.Name = "txtRecipient";
+            this.txtRecipient.Size = new System.Drawing.Size(164, 20);
+            this.txtRecipient.TabIndex = 22;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(668, 214);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(31, 13);
+            this.label17.TabIndex = 21;
+            this.label17.Text = "Days";
+            // 
+            // txtDays
+            // 
+            this.txtDays.Location = new System.Drawing.Point(781, 211);
+            this.txtDays.Name = "txtDays";
+            this.txtDays.Size = new System.Drawing.Size(164, 20);
+            this.txtDays.TabIndex = 22;
+            // 
+            // btnPaymentRequest
+            // 
+            this.btnPaymentRequest.Location = new System.Drawing.Point(781, 244);
+            this.btnPaymentRequest.Name = "btnPaymentRequest";
+            this.btnPaymentRequest.Size = new System.Drawing.Size(164, 23);
+            this.btnPaymentRequest.TabIndex = 28;
+            this.btnPaymentRequest.Text = "Payment Request";
+            this.btnPaymentRequest.UseVisualStyleBackColor = true;
+            this.btnPaymentRequest.Click += new System.EventHandler(this.btnPaymentRequest_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(668, 188);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(44, 13);
+            this.label18.TabIndex = 21;
+            this.label18.Text = "Reason";
+            // 
+            // txtReason
+            // 
+            this.txtReason.Location = new System.Drawing.Point(781, 185);
+            this.txtReason.Name = "txtReason";
+            this.txtReason.Size = new System.Drawing.Size(164, 20);
+            this.txtReason.TabIndex = 22;
+            // 
+            // cmbLanguage
+            // 
+            this.cmbLanguage.FormattingEnabled = true;
+            this.cmbLanguage.Location = new System.Drawing.Point(660, 56);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(160, 21);
+            this.cmbLanguage.TabIndex = 32;
+            this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
+            // 
+            // btnCheckCard
+            // 
+            this.btnCheckCard.Location = new System.Drawing.Point(681, 295);
+            this.btnCheckCard.Name = "btnCheckCard";
+            this.btnCheckCard.Size = new System.Drawing.Size(149, 23);
+            this.btnCheckCard.TabIndex = 28;
+            this.btnCheckCard.Text = "Check Card";
+            this.btnCheckCard.UseVisualStyleBackColor = true;
+            this.btnCheckCard.Click += new System.EventHandler(this.btnCheckCard_Click);
+            // 
+            // btnOriginalCredit
+            // 
+            this.btnOriginalCredit.Location = new System.Drawing.Point(681, 325);
+            this.btnOriginalCredit.Name = "btnOriginalCredit";
+            this.btnOriginalCredit.Size = new System.Drawing.Size(149, 23);
+            this.btnOriginalCredit.TabIndex = 28;
+            this.btnOriginalCredit.Text = "Original Credit";
+            this.btnOriginalCredit.UseVisualStyleBackColor = true;
+            this.btnOriginalCredit.Click += new System.EventHandler(this.btnOriginalCredit_Click);
+            // 
+            // btnSendLog
+            // 
+            this.btnSendLog.Location = new System.Drawing.Point(433, 8);
+            this.btnSendLog.Name = "btnSendLog";
+            this.btnSendLog.Size = new System.Drawing.Size(100, 23);
+            this.btnSendLog.TabIndex = 33;
+            this.btnSendLog.Text = "Send Log";
+            this.btnSendLog.UseVisualStyleBackColor = true;
+            this.btnSendLog.Click += new System.EventHandler(this.btnSendLog_Click);
+            // 
+            // btnVendingPurchase
+            // 
+            this.btnVendingPurchase.Location = new System.Drawing.Point(681, 354);
+            this.btnVendingPurchase.Name = "btnVendingPurchase";
+            this.btnVendingPurchase.Size = new System.Drawing.Size(149, 23);
+            this.btnVendingPurchase.TabIndex = 34;
+            this.btnVendingPurchase.Text = "Vending Purchase";
+            this.btnVendingPurchase.UseVisualStyleBackColor = true;
+            this.btnVendingPurchase.Click += new System.EventHandler(this.btnVendingPurchase_Click);
+            // 
+            // btnVendingStop
+            // 
+            this.btnVendingStop.Location = new System.Drawing.Point(681, 384);
+            this.btnVendingStop.Name = "btnVendingStop";
+            this.btnVendingStop.Size = new System.Drawing.Size(149, 23);
+            this.btnVendingStop.TabIndex = 35;
+            this.btnVendingStop.Text = "Vending Stop";
+            this.btnVendingStop.UseVisualStyleBackColor = true;
+            this.btnVendingStop.Click += new System.EventHandler(this.btnVendingStop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 783);
+            this.ClientSize = new System.Drawing.Size(1286, 991);
+            this.Controls.Add(this.btnVendingStop);
+            this.Controls.Add(this.btnVendingPurchase);
+            this.Controls.Add(this.btnSendLog);
+            this.Controls.Add(this.cmbLanguage);
+            this.Controls.Add(this.btnBigPurchase);
+            this.Controls.Add(this.btnCheckBalance);
+            this.Controls.Add(this.btnGiftDeactivation);
+            this.Controls.Add(this.btnGiftActivation);
+            this.Controls.Add(this.btnReboot);
+            this.Controls.Add(this.btnMotoPreauth);
+            this.Controls.Add(this.btnOriginalCredit);
+            this.Controls.Add(this.btnCheckCard);
+            this.Controls.Add(this.btnMotoRefund);
+            this.Controls.Add(this.btnPaymentRequest);
+            this.Controls.Add(this.btnMotoPurchase);
+            this.Controls.Add(this.btnPreauthCancel);
+            this.Controls.Add(this.btnPreauthComplete);
+            this.Controls.Add(this.btnPreauth);
             this.Controls.Add(this.btnPrintExternal);
             this.Controls.Add(this.txtPrintData);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtOperatorCode);
+            this.Controls.Add(this.txtDays);
+            this.Controls.Add(this.txtReason);
+            this.Controls.Add(this.txtRecipient);
+            this.Controls.Add(this.txtEMail);
+            this.Controls.Add(this.txtGSM);
+            this.Controls.Add(this.txtReferenceNumber);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.txtExpiryDate);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.txtPan);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txtPreauthCode);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtReference);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnReprint);
+            this.Controls.Add(this.btnPing);
             this.Controls.Add(this.btnDeactivate);
             this.Controls.Add(this.btnActivate);
             this.Controls.Add(this.btnReversal);
             this.Controls.Add(this.btnRefund);
+            this.Controls.Add(this.cmbReferenceType);
             this.Controls.Add(this.cmbReceiptMode);
             this.Controls.Add(this.cmbCurrency);
+            this.Controls.Add(this.txtTipAmount);
             this.Controls.Add(this.txtAmount);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -347,6 +842,51 @@
         private System.Windows.Forms.TextBox txtReference;
         private System.Windows.Forms.TextBox txtPrintData;
         private System.Windows.Forms.Button btnPrintExternal;
+        private System.Windows.Forms.Button btnPreauth;
+        private System.Windows.Forms.TextBox txtPreauthCode;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnPreauthComplete;
+        private System.Windows.Forms.Button btnPreauthCancel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtPan;
+        private System.Windows.Forms.TextBox txtExpiryDate;
+        private System.Windows.Forms.Button btnMotoPurchase;
+        private System.Windows.Forms.Button btnMotoRefund;
+        private System.Windows.Forms.Button btnMotoPreauth;
+        private System.Windows.Forms.Button btnPing;
+        private System.Windows.Forms.Button btnReboot;
+        private System.Windows.Forms.Button btnGiftActivation;
+        private System.Windows.Forms.Button btnGiftDeactivation;
+        private System.Windows.Forms.Button btnCheckBalance;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtTipAmount;
+        private System.Windows.Forms.ComboBox cmbReferenceType;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtReferenceNumber;
+        private System.Windows.Forms.Button btnBigPurchase;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtOperatorCode;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtGSM;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtEMail;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtRecipient;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtDays;
+        private System.Windows.Forms.Button btnPaymentRequest;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtReason;
+        private System.Windows.Forms.ComboBox cmbLanguage;
+        private System.Windows.Forms.Button btnCheckCard;
+        private System.Windows.Forms.Button btnOriginalCredit;
+        private System.Windows.Forms.Button btnSendLog;
+        private System.Windows.Forms.Button btnVendingPurchase;
+        private System.Windows.Forms.Button btnVendingStop;
     }
 }
 
