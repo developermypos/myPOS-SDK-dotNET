@@ -24,8 +24,15 @@ namespace myPOSDemoApp
             InitializeComponent();
             
             t.ProcessingFinished += ProcessResult;
-            t.Log += AddLog;
+            t.Log += AddDebugLog;
+            t.onPresentCard += _PresentCard;
+            t.onCardDetected += _CardDetected;
+            t.onPresentPin += _PresentPin;
+            t.onPinEntered += _PinEntered;
+            t.onPresentDCC += _PresentDCC;
+            t.onDCCSelected += _DCCSelected;
             t.SetLanguage(Language.English);
+            t.SetCOMTimeout(3000);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -40,6 +47,8 @@ namespace myPOSDemoApp
 
             cmbLanguage.DataSource = Enum.GetValues(typeof(Language));
             cmbLanguage.SelectedItem = Language.English;
+
+            cmbBeepTone.DataSource = Enum.GetValues(typeof(BeepTone));
 
             this.Text = "myPOSDemoApp Version " + version.ToString();
             AddLog("myPOSDemoApp Version: " + version.ToString());
@@ -67,6 +76,7 @@ namespace myPOSDemoApp
                 sb.AppendFormat("\r\nTransaction data:\r\n");
                 sb.AppendFormat("Type: {0}\r\n", r.TranData.Type);
                 sb.AppendFormat("Amount: {0}\r\n", r.TranData.Amount);
+                sb.AppendFormat("Tip Amount: {0}\r\n", r.TranData.TipAmount);
                 sb.AppendFormat("Currency: {0}\r\n", r.TranData.Currency.ToString());
                 sb.AppendFormat("Approval: {0}\r\n", r.TranData.Approval);
                 sb.AppendFormat("Auth code: {0}\r\n", r.TranData.AuthCode);
@@ -107,6 +117,73 @@ namespace myPOSDemoApp
                 txtLog.AppendText(msg + "\r\n");
             }
             catch { }
+        }
+
+        void AddDebugLog(string msg)
+        {
+            if (!chkWriteLog.Checked) return;
+            AddLog(msg);
+        }
+
+        void _PresentCard()
+        {
+            AddLog("Present card");
+        }
+
+        void _CardDetected(bool is_wrong_card)
+        {
+            if (!is_wrong_card)
+            {
+                AddLog("Card detected");
+            }
+            else
+            {
+                AddLog("Bad card detected");
+            }
+        }
+
+        void _PresentPin(int pin_tries_left)
+        {
+            if (pin_tries_left == 0)
+            {
+                AddLog("Present online pin");
+            }
+            else
+            {
+                AddLog(String.Format("Present offline pin. Tries left: {0}", pin_tries_left));
+            }
+        }
+
+        void _PinEntered(bool is_wrong_pin, int pin_tries_left)
+        {
+            if (is_wrong_pin == false)
+            {
+                AddLog("PIN entered");
+            }
+            else
+            {
+                AddLog(String.Format("Wrong PIN entered. Tries left: {0}", pin_tries_left));
+            }
+        }
+
+        void _PresentDCC(DCCRequest dcc_req)
+        {
+            AddLog("Present DCC");
+            AddLog(String.Format("{0} {1}", dcc_req.OriginalAmount, dcc_req.OriginalCurrencyName));
+            AddLog(String.Format("{0} {1}", dcc_req.DCCAmount, dcc_req.DCCCurrencyName));
+            AddLog(String.Format("1 {0} = {1} {2}", dcc_req.OriginalCurrencyName, dcc_req.DCCExchangeRate, dcc_req.DCCCurrencyName));
+        }
+
+        void _DCCSelected(bool is_dcc_used)
+        {
+            if (is_dcc_used)
+            {
+                AddLog("DCC used");
+            }
+            else
+            {
+                AddLog("No DCC used");
+            }
         }
 
         private bool ParseAmount()
@@ -624,6 +701,24 @@ namespace myPOSDemoApp
         private void btnVendingStop_Click(object sender, EventArgs e)
         {
             t.VendingStop();
+        }
+
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            txtLog.Text = "";
+        }
+
+        private void btnBeep_Click(object sender, EventArgs e)
+        {
+            BeepTone tone = BeepTone.Tone_1680_Hz;
+            int duration = 0;
+            if (!(cmbBeepTone.SelectedItem is null))
+            {
+                tone = (BeepTone)cmbBeepTone.SelectedValue;
+            }
+            Int32.TryParse(txtBeepDuration.Text, out duration);
+
+            t.Beep(tone, duration);
         }
     }
 }

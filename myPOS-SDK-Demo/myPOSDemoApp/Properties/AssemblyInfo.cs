@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("myPOSDemoApp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("myPOS Demo application for slave mode communication under myPOS IPP protocol.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("myPOS")]
 [assembly: AssemblyProduct("myPOSDemoApp")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7fcc029f-91cf-401b-b61b-d4e74b02e462")]
+[assembly: Guid("b3a3b023-41f5-4ef5-ae6e-3cf9e59ecf29")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1.5")]
-[assembly: AssemblyFileVersion("1.0.1.5")]
+[assembly: AssemblyVersion("1.0.2.0")]
+[assembly: AssemblyFileVersion("1.0.2.0")]
