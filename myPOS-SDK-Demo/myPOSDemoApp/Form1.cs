@@ -700,7 +700,52 @@ namespace myPOSDemoApp
 
         private void btnVendingStop_Click(object sender, EventArgs e)
         {
-            t.VendingStop();
+            RequestResult r = t.VendingStop();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnVendingComplete_Click(object sender, EventArgs e)
+        {
+
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+                RequestResult r = t.VendingComplete(Amount, cur);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnVendingCancel_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.VendingCancel();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
         }
 
         private void btnClearLog_Click(object sender, EventArgs e)

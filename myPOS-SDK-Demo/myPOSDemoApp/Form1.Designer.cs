@@ -105,6 +105,8 @@
             this.label20 = new System.Windows.Forms.Label();
             this.cmbBeepTone = new System.Windows.Forms.ComboBox();
             this.txtBeepDuration = new System.Windows.Forms.TextBox();
+            this.btnVendingComplete = new System.Windows.Forms.Button();
+            this.btnVendingCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbComPorts
@@ -723,7 +725,7 @@
             // 
             // btnVendingPurchase
             // 
-            this.btnVendingPurchase.Location = new System.Drawing.Point(681, 354);
+            this.btnVendingPurchase.Location = new System.Drawing.Point(854, 296);
             this.btnVendingPurchase.Name = "btnVendingPurchase";
             this.btnVendingPurchase.Size = new System.Drawing.Size(149, 23);
             this.btnVendingPurchase.TabIndex = 34;
@@ -733,7 +735,7 @@
             // 
             // btnVendingStop
             // 
-            this.btnVendingStop.Location = new System.Drawing.Point(681, 384);
+            this.btnVendingStop.Location = new System.Drawing.Point(854, 325);
             this.btnVendingStop.Name = "btnVendingStop";
             this.btnVendingStop.Size = new System.Drawing.Size(149, 23);
             this.btnVendingStop.TabIndex = 35;
@@ -807,6 +809,26 @@
             this.txtBeepDuration.Size = new System.Drawing.Size(113, 20);
             this.txtBeepDuration.TabIndex = 42;
             // 
+            // btnVendingComplete
+            // 
+            this.btnVendingComplete.Location = new System.Drawing.Point(854, 355);
+            this.btnVendingComplete.Name = "btnVendingComplete";
+            this.btnVendingComplete.Size = new System.Drawing.Size(149, 23);
+            this.btnVendingComplete.TabIndex = 35;
+            this.btnVendingComplete.Text = "Vending Complete";
+            this.btnVendingComplete.UseVisualStyleBackColor = true;
+            this.btnVendingComplete.Click += new System.EventHandler(this.btnVendingComplete_Click);
+            // 
+            // btnVendingCancel
+            // 
+            this.btnVendingCancel.Location = new System.Drawing.Point(854, 384);
+            this.btnVendingCancel.Name = "btnVendingCancel";
+            this.btnVendingCancel.Size = new System.Drawing.Size(149, 23);
+            this.btnVendingCancel.TabIndex = 35;
+            this.btnVendingCancel.Text = "Vending Cancel";
+            this.btnVendingCancel.UseVisualStyleBackColor = true;
+            this.btnVendingCancel.Click += new System.EventHandler(this.btnVendingCancel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -819,6 +841,8 @@
             this.Controls.Add(this.btnBeep);
             this.Controls.Add(this.chkWriteLog);
             this.Controls.Add(this.btnClearLog);
+            this.Controls.Add(this.btnVendingCancel);
+            this.Controls.Add(this.btnVendingComplete);
             this.Controls.Add(this.btnVendingStop);
             this.Controls.Add(this.btnVendingPurchase);
             this.Controls.Add(this.btnSendLog);
@@ -974,6 +998,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cmbBeepTone;
         private System.Windows.Forms.TextBox txtBeepDuration;
+        private System.Windows.Forms.Button btnVendingComplete;
+        private System.Windows.Forms.Button btnVendingCancel;
     }
 }
 
