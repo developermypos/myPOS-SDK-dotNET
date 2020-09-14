@@ -22,7 +22,7 @@ namespace myPOSDemoApp
         public Form1()
         {
             InitializeComponent();
-            
+
             t.ProcessingFinished += ProcessResult;
             t.Log += AddDebugLog;
             t.onPresentCard += _PresentCard;
@@ -33,6 +33,7 @@ namespace myPOSDemoApp
             t.onDCCSelected += _DCCSelected;
             t.SetLanguage(Language.English);
             t.SetCOMTimeout(3000);
+            t.isFixedPinpad = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -93,6 +94,7 @@ namespace myPOSDemoApp
                 sb.AppendFormat("Emboss Name: {0}\r\n", r.TranData.EmbossName);
                 sb.AppendFormat("AID: {0}\r\n", r.TranData.AID);
                 sb.AppendFormat("AID Name: {0}\r\n", r.TranData.AIDName);
+                sb.AppendFormat("AID Preferred Name: {0}\r\n", r.TranData.ApplicationPreferredName);
                 sb.AppendFormat("STAN: {0}\r\n", r.TranData.Stan);
                 sb.AppendFormat("Signature Required: {0}\r\n", r.TranData.SignatureRequired ? "Yes" : "No");
             }
@@ -115,6 +117,18 @@ namespace myPOSDemoApp
             try
             {
                 txtLog.AppendText(msg + "\r\n");
+
+                var indexOfCurrency = msg.IndexOf("CURRENCY_NAME=");
+
+                if (indexOfCurrency != -1)
+                {
+                    var indexOfComboBoxCurrency = cmbCurrency.Items.IndexOf(Enum.Parse(typeof(Currencies), msg.Substring(indexOfCurrency + "CURRENCY_NAME=".Length, 3)));
+
+                    if (indexOfComboBoxCurrency != -1)
+                    {
+                        cmbCurrency.SelectedIndex = indexOfComboBoxCurrency;
+                    }
+                }
             }
             catch { }
         }
@@ -247,6 +261,7 @@ namespace myPOSDemoApp
             }
             else
             {
+
                 RequestResult r = t.Purchase(Amount, cur, txtReference.Text);
                 switch (r)
                 {
@@ -581,7 +596,7 @@ namespace myPOSDemoApp
             }
             else
             {
-                RequestResult r = t.Purchase(Amount, Tip, cur, (ReferenceNumberType) cmbReferenceType.SelectedItem, txtReferenceNumber.Text, txtOperatorCode.Text);
+                RequestResult r = t.Purchase(Amount, Tip, cur, (ReferenceNumberType)cmbReferenceType.SelectedItem, txtReferenceNumber.Text, txtOperatorCode.Text);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -764,6 +779,21 @@ namespace myPOSDemoApp
             Int32.TryParse(txtBeepDuration.Text, out duration);
 
             t.Beep(tone, duration);
+        }
+
+        private void btnOpenSettings_Click(object sender, EventArgs e)
+        {
+            t.OpenSettings();
+        }
+
+        private void fixedPinpadCb_CheckedChanged(object sender, EventArgs e)
+        {
+            t.isFixedPinpad = !t.isFixedPinpad;
+        }
+
+        private void btnCheckForCRR_Click(object sender, EventArgs e)
+        {
+            t.CheckForCRRTransaction();
         }
     }
 }

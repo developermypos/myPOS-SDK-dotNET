@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FCC029F-91CF-401B-B61B-D4E74B02E462}</ProjectGuid>
+    <ProjectGuid>{B3A3B023-41F5-4EF5-AE6E-3CF9E59ECF29}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>myPOSDemoApp</RootNamespace>
-    <AssemblyName>myPOSDemoApp</AssemblyName>
+    <RootNamespace>myPOSTerminalDemoApp</RootNamespace>
+    <AssemblyName>myPOSTerminalDemoApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
