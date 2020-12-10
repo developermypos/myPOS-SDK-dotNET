@@ -110,6 +110,10 @@
 			this.btnOpenSettings = new System.Windows.Forms.Button();
 			this.fixedPinpadCb = new System.Windows.Forms.CheckBox();
 			this.btnCheckForCRR = new System.Windows.Forms.Button();
+			this.btnStopWaitingCard = new System.Windows.Forms.Button();
+			this.btnCashAdvance = new System.Windows.Forms.Button();
+			this.btnPrintExternalUTF8 = new System.Windows.Forms.Button();
+			this.chkVendingShowAmount = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// cmbComPorts
@@ -279,7 +283,7 @@
 			// 
 			// btnReprint
 			// 
-			this.btnReprint.Location = new System.Drawing.Point(114, 395);
+			this.btnReprint.Location = new System.Drawing.Point(227, 395);
 			this.btnReprint.Name = "btnReprint";
 			this.btnReprint.Size = new System.Drawing.Size(117, 23);
 			this.btnReprint.TabIndex = 18;
@@ -339,9 +343,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnPrintExternal.Location = new System.Drawing.Point(1142, 273);
 			this.btnPrintExternal.Name = "btnPrintExternal";
-			this.btnPrintExternal.Size = new System.Drawing.Size(249, 23);
+			this.btnPrintExternal.Size = new System.Drawing.Size(128, 23);
 			this.btnPrintExternal.TabIndex = 24;
-			this.btnPrintExternal.Text = "Print external data";
+			this.btnPrintExternal.Text = "Print external ASCII";
 			this.btnPrintExternal.UseVisualStyleBackColor = true;
 			this.btnPrintExternal.Click += new System.EventHandler(this.btnPrintExternal_Click);
 			// 
@@ -865,11 +869,56 @@
 			this.btnCheckForCRR.UseVisualStyleBackColor = true;
 			this.btnCheckForCRR.Click += new System.EventHandler(this.btnCheckForCRR_Click);
 			// 
+			// btnStopWaitingCard
+			// 
+			this.btnStopWaitingCard.Location = new System.Drawing.Point(105, 395);
+			this.btnStopWaitingCard.Name = "btnStopWaitingCard";
+			this.btnStopWaitingCard.Size = new System.Drawing.Size(116, 23);
+			this.btnStopWaitingCard.TabIndex = 45;
+			this.btnStopWaitingCard.Text = "Stop waiting card";
+			this.btnStopWaitingCard.UseVisualStyleBackColor = true;
+			this.btnStopWaitingCard.Click += new System.EventHandler(this.btnStopWaitingCard_Click);
+			// 
+			// btnCashAdvance
+			// 
+			this.btnCashAdvance.Location = new System.Drawing.Point(681, 354);
+			this.btnCashAdvance.Name = "btnCashAdvance";
+			this.btnCashAdvance.Size = new System.Drawing.Size(149, 23);
+			this.btnCashAdvance.TabIndex = 46;
+			this.btnCashAdvance.Text = "Cash Advance";
+			this.btnCashAdvance.UseVisualStyleBackColor = true;
+			this.btnCashAdvance.Click += new System.EventHandler(this.btnCashAdvance_Click);
+			// 
+			// btnPrintExternalUTF8
+			// 
+			this.btnPrintExternalUTF8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnPrintExternalUTF8.Location = new System.Drawing.Point(1276, 273);
+			this.btnPrintExternalUTF8.Name = "btnPrintExternalUTF8";
+			this.btnPrintExternalUTF8.Size = new System.Drawing.Size(115, 23);
+			this.btnPrintExternalUTF8.TabIndex = 24;
+			this.btnPrintExternalUTF8.Text = "Print external UTF8";
+			this.btnPrintExternalUTF8.UseVisualStyleBackColor = true;
+			this.btnPrintExternalUTF8.Click += new System.EventHandler(this.btnPrintExternalUTF8_Click);
+			// 
+			// chkVendingShowAmount
+			// 
+			this.chkVendingShowAmount.AutoSize = true;
+			this.chkVendingShowAmount.Location = new System.Drawing.Point(836, 273);
+			this.chkVendingShowAmount.Name = "chkVendingShowAmount";
+			this.chkVendingShowAmount.Size = new System.Drawing.Size(194, 17);
+			this.chkVendingShowAmount.TabIndex = 47;
+			this.chkVendingShowAmount.Text = "Show amount on vending purchase";
+			this.chkVendingShowAmount.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1403, 991);
+			this.Controls.Add(this.chkVendingShowAmount);
+			this.Controls.Add(this.btnCashAdvance);
+			this.Controls.Add(this.btnStopWaitingCard);
 			this.Controls.Add(this.btnCheckForCRR);
 			this.Controls.Add(this.fixedPinpadCb);
 			this.Controls.Add(this.txtBeepDuration);
@@ -900,6 +949,7 @@
 			this.Controls.Add(this.btnPreauthCancel);
 			this.Controls.Add(this.btnPreauthComplete);
 			this.Controls.Add(this.btnPreauth);
+			this.Controls.Add(this.btnPrintExternalUTF8);
 			this.Controls.Add(this.btnPrintExternal);
 			this.Controls.Add(this.txtPrintData);
 			this.Controls.Add(this.txtPassword);
@@ -1042,6 +1092,10 @@
 		private System.Windows.Forms.Button btnOpenSettings;
 		private System.Windows.Forms.CheckBox fixedPinpadCb;
 		private System.Windows.Forms.Button btnCheckForCRR;
+		private System.Windows.Forms.Button btnStopWaitingCard;
+		private System.Windows.Forms.Button btnCashAdvance;
+		private System.Windows.Forms.Button btnPrintExternalUTF8;
+		private System.Windows.Forms.CheckBox chkVendingShowAmount;
 	}
 }
 

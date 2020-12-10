@@ -700,7 +700,7 @@ namespace myPOSDemoApp
             }
             else
             {
-                RequestResult r = t.VendingPurchase(Amount, cur);
+                RequestResult r = t.VendingPurchase(Amount, cur, chkVendingShowAmount.Checked);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -795,5 +795,46 @@ namespace myPOSDemoApp
         {
             t.CheckForCRRTransaction();
         }
-    }
+
+		private void btnStopWaitingCard_Click(object sender, EventArgs e)
+		{
+			RequestResult r = t.StopWaitingForCard();
+			switch (r)
+			{
+				case RequestResult.Busy:
+				case RequestResult.InvalidParams:
+				case RequestResult.NotInitialized:
+					MessageBox.Show("RequestResult: " + r.ToString());
+					break;
+				default: break;
+			}
+		}
+
+		private void btnCashAdvance_Click(object sender, EventArgs e)
+		{
+			if (!ParseAmount() || !ParseCurrency())
+			{
+				MessageBox.Show("Invalid input");
+			}
+			else
+			{
+				t.SetPassword(txtPassword.Text);
+				RequestResult r = t.CashAdvance(Amount, cur);
+				switch (r)
+				{
+					case RequestResult.Busy:
+					case RequestResult.InvalidParams:
+					case RequestResult.NotInitialized:
+						MessageBox.Show("RequestResult: " + r.ToString());
+						break;
+					default: break;
+				}
+			}
+		}
+
+		private void btnPrintExternalUTF8_Click(object sender, EventArgs e)
+		{
+			t.PrintExternalUTF8(txtPrintData.Text);
+		}
+	}
 }

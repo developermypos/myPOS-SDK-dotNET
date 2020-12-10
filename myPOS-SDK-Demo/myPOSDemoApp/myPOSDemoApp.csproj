@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="myPOSTerminal, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="myPOSTerminal, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\myPOSTerminal.dll</HintPath>
     </Reference>
