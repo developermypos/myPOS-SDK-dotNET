@@ -31,6 +31,7 @@ namespace myPOSDemoApp
             t.onPinEntered += _PinEntered;
             t.onPresentDCC += _PresentDCC;
             t.onDCCSelected += _DCCSelected;
+            t.onApprovalGetReceiptData += _ReceiptReceiver;
             t.SetLanguage(Language.English);
             t.SetCOMTimeout(3000);
             t.isFixedPinpad = true;
@@ -97,7 +98,8 @@ namespace myPOSDemoApp
                 sb.AppendFormat("AID Preferred Name: {0}\r\n", r.TranData.ApplicationPreferredName);
                 sb.AppendFormat("STAN: {0}\r\n", r.TranData.Stan);
                 sb.AppendFormat("Signature Required: {0}\r\n", r.TranData.SignatureRequired ? "Yes" : "No");
-            }
+				sb.AppendFormat("Software Version: {0}\r\n", r.TranData.SoftwareVersion);
+			}
 
             AddLog(sb.ToString());
             MessageBox.Show(sb.ToString());
@@ -198,6 +200,17 @@ namespace myPOSDemoApp
             {
                 AddLog("No DCC used");
             }
+        }
+
+        string _ReceiptReceiver()
+        {
+            string result = "";
+            ReceiptReceiverForm formEntry = new ReceiptReceiverForm();
+            if (formEntry.ShowDialog() == DialogResult.OK)
+            {
+                result = formEntry.txtResult.Text;
+            }
+            return result;
         }
 
         private bool ParseAmount()
