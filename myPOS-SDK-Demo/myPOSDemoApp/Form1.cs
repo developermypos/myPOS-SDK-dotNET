@@ -65,6 +65,8 @@ namespace myPOSDemoApp
         {
             cmbComPorts.Items.Clear();
             cmbComPorts.Items.AddRange(SerialPort.GetPortNames());
+            cmbComPorts.SelectedIndex = -1;
+            cmbComPorts.ResetText();
         }
 
         protected void ProcessResult(ProcessingResult r)
@@ -242,9 +244,14 @@ namespace myPOSDemoApp
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            if (cmbComPorts.SelectedIndex < 0) return;
+            if (cmbComPorts.Text == String.Empty) return;
 
-            t.Initialize((string)cmbComPorts.SelectedItem);
+            t.Initialize(cmbComPorts.Text);
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            t.Disconnect();
         }
 
         private void btnAbort_Click(object sender, EventArgs e)
@@ -849,5 +856,5 @@ namespace myPOSDemoApp
 		{
 			t.PrintExternalUTF8(txtPrintData.Text);
 		}
-	}
+    }
 }
