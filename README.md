@@ -95,7 +95,7 @@ There is an event that is raised when a response is received from the POS device
             {
 		          // transaction response
             }
- 		   }
+ 	}
        
 ```
 
