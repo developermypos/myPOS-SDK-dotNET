@@ -32,7 +32,6 @@
             this.cmbComPorts = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.btnPurchase = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.btnAbort = new System.Windows.Forms.Button();
             this.btnGetStatus = new System.Windows.Forms.Button();
@@ -49,8 +48,6 @@
             this.btnReprint = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbReceiptMode = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtReference = new System.Windows.Forms.TextBox();
             this.txtPrintData = new System.Windows.Forms.TextBox();
             this.btnPrintExternal = new System.Windows.Forms.Button();
             this.btnPreauth = new System.Windows.Forms.Button();
@@ -76,7 +73,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtReferenceNumber = new System.Windows.Forms.TextBox();
-            this.btnBigPurchase = new System.Windows.Forms.Button();
+            this.btnPurchase = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txtOperatorCode = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -115,6 +112,31 @@
             this.btnPrintExternalUTF8 = new System.Windows.Forms.Button();
             this.chkVendingShowAmount = new System.Windows.Forms.CheckBox();
             this.btnDisconnect = new System.Windows.Forms.Button();
+            this.btnVendingAutoCycle = new System.Windows.Forms.Button();
+            this.chbVendingAutoCycleCompleteTransactions = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtDispalyTextRow1 = new System.Windows.Forms.TextBox();
+            this.txtDispalyTextRow2 = new System.Windows.Forms.TextBox();
+            this.txtDispalyTextRow3 = new System.Windows.Forms.TextBox();
+            this.txtDispalyTextRow4 = new System.Windows.Forms.TextBox();
+            this.txtDispalyTextRow5 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.cmbDispalyTextRow1Align = new System.Windows.Forms.ComboBox();
+            this.cmbDispalyTextRow2Align = new System.Windows.Forms.ComboBox();
+            this.cmbDispalyTextRow3Align = new System.Windows.Forms.ComboBox();
+            this.cmbDispalyTextRow4Align = new System.Windows.Forms.ComboBox();
+            this.cmbDispalyTextRow5Align = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtDispalyTextTimeout = new System.Windows.Forms.TextBox();
+            this.btnDisplayText = new System.Windows.Forms.Button();
+            this.btnIsWaitingForCard = new System.Windows.Forms.Button();
+            this.btnHideText = new System.Windows.Forms.Button();
+            this.btnPurchaseAutoCycle = new System.Windows.Forms.Button();
+            this.btnTwintPurchase = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbComPorts
@@ -145,16 +167,6 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // btnPurchase
-            // 
-            this.btnPurchase.Location = new System.Drawing.Point(24, 295);
-            this.btnPurchase.Name = "btnPurchase";
-            this.btnPurchase.Size = new System.Drawing.Size(75, 23);
-            this.btnPurchase.TabIndex = 3;
-            this.btnPurchase.Text = "Purchase";
-            this.btnPurchase.UseVisualStyleBackColor = true;
-            this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
-            // 
             // txtLog
             // 
             this.txtLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -166,7 +178,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(1379, 555);
+            this.txtLog.Size = new System.Drawing.Size(1758, 555);
             this.txtLog.TabIndex = 4;
             // 
             // btnAbort
@@ -244,9 +256,9 @@
             // 
             // btnRefund
             // 
-            this.btnRefund.Location = new System.Drawing.Point(114, 295);
+            this.btnRefund.Location = new System.Drawing.Point(152, 296);
             this.btnRefund.Name = "btnRefund";
-            this.btnRefund.Size = new System.Drawing.Size(75, 23);
+            this.btnRefund.Size = new System.Drawing.Size(120, 23);
             this.btnRefund.TabIndex = 15;
             this.btnRefund.Text = "Refund";
             this.btnRefund.UseVisualStyleBackColor = true;
@@ -254,9 +266,9 @@
             // 
             // btnReversal
             // 
-            this.btnReversal.Location = new System.Drawing.Point(203, 295);
+            this.btnReversal.Location = new System.Drawing.Point(278, 296);
             this.btnReversal.Name = "btnReversal";
-            this.btnReversal.Size = new System.Drawing.Size(75, 23);
+            this.btnReversal.Size = new System.Drawing.Size(133, 23);
             this.btnReversal.TabIndex = 16;
             this.btnReversal.Text = "Reversal";
             this.btnReversal.UseVisualStyleBackColor = true;
@@ -311,27 +323,10 @@
             this.cmbReceiptMode.TabIndex = 14;
             this.cmbReceiptMode.SelectedIndexChanged += new System.EventHandler(this.cmbCurrency_SelectedIndexChanged);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 218);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Reference";
-            // 
-            // txtReference
-            // 
-            this.txtReference.Location = new System.Drawing.Point(114, 215);
-            this.txtReference.Name = "txtReference";
-            this.txtReference.Size = new System.Drawing.Size(164, 20);
-            this.txtReference.TabIndex = 22;
-            // 
             // txtPrintData
             // 
-            this.txtPrintData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrintData.Location = new System.Drawing.Point(1142, 13);
+            this.txtPrintData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPrintData.Location = new System.Drawing.Point(1521, 13);
             this.txtPrintData.Multiline = true;
             this.txtPrintData.Name = "txtPrintData";
             this.txtPrintData.Size = new System.Drawing.Size(249, 254);
@@ -340,9 +335,8 @@
             // 
             // btnPrintExternal
             // 
-            this.btnPrintExternal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintExternal.Location = new System.Drawing.Point(1142, 273);
+            this.btnPrintExternal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrintExternal.Location = new System.Drawing.Point(1521, 273);
             this.btnPrintExternal.Name = "btnPrintExternal";
             this.btnPrintExternal.Size = new System.Drawing.Size(128, 23);
             this.btnPrintExternal.TabIndex = 24;
@@ -354,7 +348,7 @@
             // 
             this.btnPreauth.Location = new System.Drawing.Point(24, 325);
             this.btnPreauth.Name = "btnPreauth";
-            this.btnPreauth.Size = new System.Drawing.Size(75, 23);
+            this.btnPreauth.Size = new System.Drawing.Size(84, 23);
             this.btnPreauth.TabIndex = 25;
             this.btnPreauth.Text = "Preauth";
             this.btnPreauth.UseVisualStyleBackColor = true;
@@ -362,7 +356,7 @@
             // 
             // txtPreauthCode
             // 
-            this.txtPreauthCode.Location = new System.Drawing.Point(114, 241);
+            this.txtPreauthCode.Location = new System.Drawing.Point(114, 211);
             this.txtPreauthCode.Name = "txtPreauthCode";
             this.txtPreauthCode.Size = new System.Drawing.Size(164, 20);
             this.txtPreauthCode.TabIndex = 22;
@@ -370,7 +364,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 244);
+            this.label6.Location = new System.Drawing.Point(21, 213);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 13);
             this.label6.TabIndex = 21;
@@ -559,15 +553,15 @@
             this.txtReferenceNumber.Size = new System.Drawing.Size(164, 20);
             this.txtReferenceNumber.TabIndex = 22;
             // 
-            // btnBigPurchase
+            // btnPurchase
             // 
-            this.btnBigPurchase.Location = new System.Drawing.Point(289, 296);
-            this.btnBigPurchase.Name = "btnBigPurchase";
-            this.btnBigPurchase.Size = new System.Drawing.Size(122, 23);
-            this.btnBigPurchase.TabIndex = 31;
-            this.btnBigPurchase.Text = "Purcase + Tip";
-            this.btnBigPurchase.UseVisualStyleBackColor = true;
-            this.btnBigPurchase.Click += new System.EventHandler(this.btnBigPurchase_Click);
+            this.btnPurchase.Location = new System.Drawing.Point(24, 296);
+            this.btnPurchase.Name = "btnPurchase";
+            this.btnPurchase.Size = new System.Drawing.Size(122, 23);
+            this.btnPurchase.TabIndex = 31;
+            this.btnPurchase.Text = "Purcase";
+            this.btnPurchase.UseVisualStyleBackColor = true;
+            this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
             // 
             // label12
             // 
@@ -600,7 +594,6 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(164, 20);
             this.txtPassword.TabIndex = 22;
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // label14
             // 
@@ -753,7 +746,8 @@
             // 
             // btnClearLog
             // 
-            this.btnClearLog.Location = new System.Drawing.Point(1259, 384);
+            this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearLog.Location = new System.Drawing.Point(1638, 384);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(132, 23);
             this.btnClearLog.TabIndex = 36;
@@ -763,10 +757,11 @@
             // 
             // chkWriteLog
             // 
+            this.chkWriteLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkWriteLog.AutoSize = true;
             this.chkWriteLog.Checked = true;
             this.chkWriteLog.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkWriteLog.Location = new System.Drawing.Point(1290, 361);
+            this.chkWriteLog.Location = new System.Drawing.Point(1669, 361);
             this.chkWriteLog.Name = "chkWriteLog";
             this.chkWriteLog.Size = new System.Drawing.Size(101, 17);
             this.chkWriteLog.TabIndex = 37;
@@ -862,7 +857,8 @@
             // 
             // btnCheckForCRR
             // 
-            this.btnCheckForCRR.Location = new System.Drawing.Point(1142, 303);
+            this.btnCheckForCRR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckForCRR.Location = new System.Drawing.Point(1521, 303);
             this.btnCheckForCRR.Name = "btnCheckForCRR";
             this.btnCheckForCRR.Size = new System.Drawing.Size(249, 23);
             this.btnCheckForCRR.TabIndex = 44;
@@ -892,9 +888,8 @@
             // 
             // btnPrintExternalUTF8
             // 
-            this.btnPrintExternalUTF8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintExternalUTF8.Location = new System.Drawing.Point(1276, 273);
+            this.btnPrintExternalUTF8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrintExternalUTF8.Location = new System.Drawing.Point(1655, 273);
             this.btnPrintExternalUTF8.Name = "btnPrintExternalUTF8";
             this.btnPrintExternalUTF8.Size = new System.Drawing.Size(115, 23);
             this.btnPrintExternalUTF8.TabIndex = 24;
@@ -922,11 +917,256 @@
             this.btnDisconnect.UseVisualStyleBackColor = true;
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
+            // btnVendingAutoCycle
+            // 
+            this.btnVendingAutoCycle.Location = new System.Drawing.Point(1009, 296);
+            this.btnVendingAutoCycle.Name = "btnVendingAutoCycle";
+            this.btnVendingAutoCycle.Size = new System.Drawing.Size(149, 23);
+            this.btnVendingAutoCycle.TabIndex = 49;
+            this.btnVendingAutoCycle.Text = "Start Vending Autocycle";
+            this.btnVendingAutoCycle.UseVisualStyleBackColor = true;
+            this.btnVendingAutoCycle.Click += new System.EventHandler(this.btnVendingAutoCycle_Click);
+            // 
+            // chbVendingAutoCycleCompleteTransactions
+            // 
+            this.chbVendingAutoCycleCompleteTransactions.AutoSize = true;
+            this.chbVendingAutoCycleCompleteTransactions.Location = new System.Drawing.Point(1010, 325);
+            this.chbVendingAutoCycleCompleteTransactions.Name = "chbVendingAutoCycleCompleteTransactions";
+            this.chbVendingAutoCycleCompleteTransactions.Size = new System.Drawing.Size(154, 17);
+            this.chbVendingAutoCycleCompleteTransactions.TabIndex = 50;
+            this.chbVendingAutoCycleCompleteTransactions.Text = "Complete auto transactions";
+            this.chbVendingAutoCycleCompleteTransactions.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(1194, 89);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(68, 13);
+            this.label21.TabIndex = 51;
+            this.label21.Text = "Display Text:";
+            // 
+            // txtDispalyTextRow1
+            // 
+            this.txtDispalyTextRow1.Location = new System.Drawing.Point(1197, 105);
+            this.txtDispalyTextRow1.Name = "txtDispalyTextRow1";
+            this.txtDispalyTextRow1.Size = new System.Drawing.Size(188, 20);
+            this.txtDispalyTextRow1.TabIndex = 52;
+            // 
+            // txtDispalyTextRow2
+            // 
+            this.txtDispalyTextRow2.Location = new System.Drawing.Point(1197, 132);
+            this.txtDispalyTextRow2.Name = "txtDispalyTextRow2";
+            this.txtDispalyTextRow2.Size = new System.Drawing.Size(188, 20);
+            this.txtDispalyTextRow2.TabIndex = 52;
+            // 
+            // txtDispalyTextRow3
+            // 
+            this.txtDispalyTextRow3.Location = new System.Drawing.Point(1197, 159);
+            this.txtDispalyTextRow3.Name = "txtDispalyTextRow3";
+            this.txtDispalyTextRow3.Size = new System.Drawing.Size(188, 20);
+            this.txtDispalyTextRow3.TabIndex = 52;
+            // 
+            // txtDispalyTextRow4
+            // 
+            this.txtDispalyTextRow4.Location = new System.Drawing.Point(1197, 186);
+            this.txtDispalyTextRow4.Name = "txtDispalyTextRow4";
+            this.txtDispalyTextRow4.Size = new System.Drawing.Size(188, 20);
+            this.txtDispalyTextRow4.TabIndex = 52;
+            // 
+            // txtDispalyTextRow5
+            // 
+            this.txtDispalyTextRow5.Location = new System.Drawing.Point(1197, 211);
+            this.txtDispalyTextRow5.Name = "txtDispalyTextRow5";
+            this.txtDispalyTextRow5.Size = new System.Drawing.Size(188, 20);
+            this.txtDispalyTextRow5.TabIndex = 52;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(1158, 108);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(38, 13);
+            this.label22.TabIndex = 53;
+            this.label22.Text = "Row 1";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(1158, 135);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(38, 13);
+            this.label23.TabIndex = 53;
+            this.label23.Text = "Row 2";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(1158, 162);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(38, 13);
+            this.label24.TabIndex = 53;
+            this.label24.Text = "Row 3";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(1158, 189);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(38, 13);
+            this.label25.TabIndex = 53;
+            this.label25.Text = "Row 4";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(1158, 214);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(38, 13);
+            this.label26.TabIndex = 53;
+            this.label26.Text = "Row 5";
+            // 
+            // cmbDispalyTextRow1Align
+            // 
+            this.cmbDispalyTextRow1Align.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDispalyTextRow1Align.FormattingEnabled = true;
+            this.cmbDispalyTextRow1Align.Location = new System.Drawing.Point(1394, 105);
+            this.cmbDispalyTextRow1Align.Name = "cmbDispalyTextRow1Align";
+            this.cmbDispalyTextRow1Align.Size = new System.Drawing.Size(83, 21);
+            this.cmbDispalyTextRow1Align.TabIndex = 54;
+            // 
+            // cmbDispalyTextRow2Align
+            // 
+            this.cmbDispalyTextRow2Align.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDispalyTextRow2Align.FormattingEnabled = true;
+            this.cmbDispalyTextRow2Align.Location = new System.Drawing.Point(1394, 133);
+            this.cmbDispalyTextRow2Align.Name = "cmbDispalyTextRow2Align";
+            this.cmbDispalyTextRow2Align.Size = new System.Drawing.Size(83, 21);
+            this.cmbDispalyTextRow2Align.TabIndex = 54;
+            // 
+            // cmbDispalyTextRow3Align
+            // 
+            this.cmbDispalyTextRow3Align.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDispalyTextRow3Align.FormattingEnabled = true;
+            this.cmbDispalyTextRow3Align.Location = new System.Drawing.Point(1394, 159);
+            this.cmbDispalyTextRow3Align.Name = "cmbDispalyTextRow3Align";
+            this.cmbDispalyTextRow3Align.Size = new System.Drawing.Size(83, 21);
+            this.cmbDispalyTextRow3Align.TabIndex = 54;
+            // 
+            // cmbDispalyTextRow4Align
+            // 
+            this.cmbDispalyTextRow4Align.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDispalyTextRow4Align.FormattingEnabled = true;
+            this.cmbDispalyTextRow4Align.Location = new System.Drawing.Point(1394, 186);
+            this.cmbDispalyTextRow4Align.Name = "cmbDispalyTextRow4Align";
+            this.cmbDispalyTextRow4Align.Size = new System.Drawing.Size(83, 21);
+            this.cmbDispalyTextRow4Align.TabIndex = 54;
+            // 
+            // cmbDispalyTextRow5Align
+            // 
+            this.cmbDispalyTextRow5Align.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDispalyTextRow5Align.FormattingEnabled = true;
+            this.cmbDispalyTextRow5Align.Location = new System.Drawing.Point(1394, 210);
+            this.cmbDispalyTextRow5Align.Name = "cmbDispalyTextRow5Align";
+            this.cmbDispalyTextRow5Align.Size = new System.Drawing.Size(83, 21);
+            this.cmbDispalyTextRow5Align.TabIndex = 54;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(1151, 239);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(45, 13);
+            this.label27.TabIndex = 55;
+            this.label27.Text = "Timeout";
+            // 
+            // txtDispalyTextTimeout
+            // 
+            this.txtDispalyTextTimeout.Location = new System.Drawing.Point(1197, 236);
+            this.txtDispalyTextTimeout.Name = "txtDispalyTextTimeout";
+            this.txtDispalyTextTimeout.Size = new System.Drawing.Size(100, 20);
+            this.txtDispalyTextTimeout.TabIndex = 56;
+            // 
+            // btnDisplayText
+            // 
+            this.btnDisplayText.Location = new System.Drawing.Point(1260, 263);
+            this.btnDisplayText.Name = "btnDisplayText";
+            this.btnDisplayText.Size = new System.Drawing.Size(137, 23);
+            this.btnDisplayText.TabIndex = 57;
+            this.btnDisplayText.Text = "Display Text";
+            this.btnDisplayText.UseVisualStyleBackColor = true;
+            this.btnDisplayText.Click += new System.EventHandler(this.btnDisplayText_Click);
+            // 
+            // btnIsWaitingForCard
+            // 
+            this.btnIsWaitingForCard.Location = new System.Drawing.Point(1010, 355);
+            this.btnIsWaitingForCard.Name = "btnIsWaitingForCard";
+            this.btnIsWaitingForCard.Size = new System.Drawing.Size(148, 23);
+            this.btnIsWaitingForCard.TabIndex = 58;
+            this.btnIsWaitingForCard.Text = "Is Waiting For Card";
+            this.btnIsWaitingForCard.UseVisualStyleBackColor = true;
+            this.btnIsWaitingForCard.Click += new System.EventHandler(this.btnIsWaitingForCard_Click);
+            // 
+            // btnHideText
+            // 
+            this.btnHideText.Location = new System.Drawing.Point(1260, 293);
+            this.btnHideText.Name = "btnHideText";
+            this.btnHideText.Size = new System.Drawing.Size(137, 23);
+            this.btnHideText.TabIndex = 59;
+            this.btnHideText.Text = "Hide text";
+            this.btnHideText.UseVisualStyleBackColor = true;
+            this.btnHideText.Click += new System.EventHandler(this.btnHideText_Click);
+            // 
+            // btnPurchaseAutoCycle
+            // 
+            this.btnPurchaseAutoCycle.Location = new System.Drawing.Point(350, 395);
+            this.btnPurchaseAutoCycle.Name = "btnPurchaseAutoCycle";
+            this.btnPurchaseAutoCycle.Size = new System.Drawing.Size(149, 23);
+            this.btnPurchaseAutoCycle.TabIndex = 60;
+            this.btnPurchaseAutoCycle.Text = "Start Purchase Autocycle";
+            this.btnPurchaseAutoCycle.UseVisualStyleBackColor = true;
+            this.btnPurchaseAutoCycle.Click += new System.EventHandler(this.btnPurchaseAutoCycle_Click);
+            // 
+            // btnTwintPurchase
+            // 
+            this.btnTwintPurchase.Location = new System.Drawing.Point(681, 384);
+            this.btnTwintPurchase.Name = "btnTwintPurchase";
+            this.btnTwintPurchase.Size = new System.Drawing.Size(149, 23);
+            this.btnTwintPurchase.TabIndex = 61;
+            this.btnTwintPurchase.Text = "Twint Purchase";
+            this.btnTwintPurchase.UseVisualStyleBackColor = true;
+            this.btnTwintPurchase.Click += new System.EventHandler(this.btnTwintPurchase_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1403, 991);
+            this.ClientSize = new System.Drawing.Size(1782, 991);
+            this.Controls.Add(this.btnTwintPurchase);
+            this.Controls.Add(this.btnPurchaseAutoCycle);
+            this.Controls.Add(this.btnHideText);
+            this.Controls.Add(this.btnIsWaitingForCard);
+            this.Controls.Add(this.btnDisplayText);
+            this.Controls.Add(this.txtDispalyTextTimeout);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.cmbDispalyTextRow5Align);
+            this.Controls.Add(this.cmbDispalyTextRow4Align);
+            this.Controls.Add(this.cmbDispalyTextRow3Align);
+            this.Controls.Add(this.cmbDispalyTextRow2Align);
+            this.Controls.Add(this.cmbDispalyTextRow1Align);
+            this.Controls.Add(this.label26);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.txtDispalyTextRow5);
+            this.Controls.Add(this.txtDispalyTextRow4);
+            this.Controls.Add(this.txtDispalyTextRow3);
+            this.Controls.Add(this.txtDispalyTextRow2);
+            this.Controls.Add(this.txtDispalyTextRow1);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.chbVendingAutoCycleCompleteTransactions);
+            this.Controls.Add(this.btnVendingAutoCycle);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.chkVendingShowAmount);
             this.Controls.Add(this.btnCashAdvance);
@@ -946,7 +1186,7 @@
             this.Controls.Add(this.btnVendingPurchase);
             this.Controls.Add(this.btnSendLog);
             this.Controls.Add(this.cmbLanguage);
-            this.Controls.Add(this.btnBigPurchase);
+            this.Controls.Add(this.btnPurchase);
             this.Controls.Add(this.btnCheckBalance);
             this.Controls.Add(this.btnGiftDeactivation);
             this.Controls.Add(this.btnGiftActivation);
@@ -984,10 +1224,8 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtPreauthCode);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtReference);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnReprint);
@@ -1009,7 +1247,6 @@
             this.Controls.Add(this.btnGetStatus);
             this.Controls.Add(this.btnAbort);
             this.Controls.Add(this.txtLog);
-            this.Controls.Add(this.btnPurchase);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.cmbComPorts);
@@ -1026,7 +1263,6 @@
         private System.Windows.Forms.ComboBox cmbComPorts;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnConnect;
-        private System.Windows.Forms.Button btnPurchase;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Button btnAbort;
         private System.Windows.Forms.Button btnGetStatus;
@@ -1043,8 +1279,6 @@
         private System.Windows.Forms.Button btnReprint;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbReceiptMode;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtReference;
         private System.Windows.Forms.TextBox txtPrintData;
         private System.Windows.Forms.Button btnPrintExternal;
         private System.Windows.Forms.Button btnPreauth;
@@ -1070,7 +1304,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtReferenceNumber;
-        private System.Windows.Forms.Button btnBigPurchase;
+        private System.Windows.Forms.Button btnPurchase;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtOperatorCode;
         private System.Windows.Forms.Label label13;
@@ -1109,6 +1343,31 @@
 		private System.Windows.Forms.Button btnPrintExternalUTF8;
 		private System.Windows.Forms.CheckBox chkVendingShowAmount;
         private System.Windows.Forms.Button btnDisconnect;
+        private System.Windows.Forms.Button btnVendingAutoCycle;
+        private System.Windows.Forms.CheckBox chbVendingAutoCycleCompleteTransactions;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtDispalyTextRow1;
+        private System.Windows.Forms.TextBox txtDispalyTextRow2;
+        private System.Windows.Forms.TextBox txtDispalyTextRow3;
+        private System.Windows.Forms.TextBox txtDispalyTextRow4;
+        private System.Windows.Forms.TextBox txtDispalyTextRow5;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ComboBox cmbDispalyTextRow1Align;
+        private System.Windows.Forms.ComboBox cmbDispalyTextRow2Align;
+        private System.Windows.Forms.ComboBox cmbDispalyTextRow3Align;
+        private System.Windows.Forms.ComboBox cmbDispalyTextRow4Align;
+        private System.Windows.Forms.ComboBox cmbDispalyTextRow5Align;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox txtDispalyTextTimeout;
+        private System.Windows.Forms.Button btnDisplayText;
+        private System.Windows.Forms.Button btnIsWaitingForCard;
+        private System.Windows.Forms.Button btnHideText;
+        private System.Windows.Forms.Button btnPurchaseAutoCycle;
+        private System.Windows.Forms.Button btnTwintPurchase;
     }
 }
 

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace myPOSDemoApp
 {
@@ -17,6 +18,13 @@ namespace myPOSDemoApp
         String ExpiryDate = "";
         String strPreauthCode = "";
         Version version = Assembly.GetEntryAssembly().GetName().Version;
+
+
+        private bool bVendingAutoCycleIsRunning = false;
+        private bool bVendingAutoCycleStopRequested = false;
+        private Thread thVendingAutoCycleThread;
+        private Semaphore semVendingAutoCycleWaitResult;
+
 
         myPOSTerminal t = new myPOSTerminal();
         public Form1()
@@ -51,6 +59,17 @@ namespace myPOSDemoApp
             cmbLanguage.SelectedItem = Language.English;
 
             cmbBeepTone.DataSource = Enum.GetValues(typeof(BeepTone));
+
+            cmbDispalyTextRow1Align.DataSource = Enum.GetValues(typeof(DispalyTextRowAlign));
+            cmbDispalyTextRow1Align.SelectedItem = DispalyTextRowAlign.Center;
+            cmbDispalyTextRow2Align.DataSource = Enum.GetValues(typeof(DispalyTextRowAlign));
+            cmbDispalyTextRow2Align.SelectedItem = DispalyTextRowAlign.Center;
+            cmbDispalyTextRow3Align.DataSource = Enum.GetValues(typeof(DispalyTextRowAlign));
+            cmbDispalyTextRow3Align.SelectedItem = DispalyTextRowAlign.Center;
+            cmbDispalyTextRow4Align.DataSource = Enum.GetValues(typeof(DispalyTextRowAlign));
+            cmbDispalyTextRow4Align.SelectedItem = DispalyTextRowAlign.Center;
+            cmbDispalyTextRow5Align.DataSource = Enum.GetValues(typeof(DispalyTextRowAlign));
+            cmbDispalyTextRow5Align.SelectedItem = DispalyTextRowAlign.Center;
 
             this.Text = "myPOSDemoApp Version " + version.ToString();
             AddLog("myPOSDemoApp Version: " + version.ToString());
@@ -104,6 +123,13 @@ namespace myPOSDemoApp
 			}
 
             AddLog(sb.ToString());
+
+            if (bVendingAutoCycleIsRunning)
+            {
+                semVendingAutoCycleWaitResult.Release(1);
+                return;
+            }
+
             MessageBox.Show(sb.ToString());
         }
 
@@ -207,6 +233,11 @@ namespace myPOSDemoApp
         string _ReceiptReceiver()
         {
             string result = "";
+            if (bVendingAutoCycleIsRunning)
+            {
+                return result;
+            }
+
             ReceiptReceiverForm formEntry = new ReceiptReceiverForm();
             if (formEntry.ShowDialog() == DialogResult.OK)
             {
@@ -275,14 +306,16 @@ namespace myPOSDemoApp
 
         private void btnPurchase_Click(object sender, EventArgs e)
         {
+            double Tip = 0;
+            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+
             if (!ParseAmount() || !ParseCurrency())
             {
                 MessageBox.Show("Invalid input");
             }
             else
             {
-
-                RequestResult r = t.Purchase(Amount, cur, txtReference.Text);
+                RequestResult r = t.Purchase(Amount, Tip, cur, (ReferenceNumberType)cmbReferenceType.SelectedItem, txtReferenceNumber.Text, txtOperatorCode.Text);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -304,7 +337,7 @@ namespace myPOSDemoApp
             else
             {
                 t.SetPassword(txtPassword.Text);
-                RequestResult r = t.Refund(Amount, cur, txtReference.Text);
+                RequestResult r = t.Refund(Amount, cur, String.Empty);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -334,7 +367,7 @@ namespace myPOSDemoApp
         private void btnReversal_Click(object sender, EventArgs e)
         {
             t.SetPassword(txtPassword.Text);
-            RequestResult r = t.Reversal(txtReference.Text);
+            RequestResult r = t.Reversal(String.Empty);
             switch (r)
             {
                 case RequestResult.Busy:
@@ -400,13 +433,16 @@ namespace myPOSDemoApp
 
         private void btnPreauth_Click(object sender, EventArgs e)
         {
+            double Tip = 0;
+            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+
             if (!ParseAmount() || !ParseCurrency())
             {
                 MessageBox.Show("Invalid input");
             }
             else
             {
-                RequestResult r = t.Preauthorization(Amount, cur, txtReference.Text);
+                RequestResult r = t.Preauthorization(Amount, Tip, cur, (ReferenceNumberType)cmbReferenceType.SelectedItem, txtReferenceNumber.Text);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -463,14 +499,16 @@ namespace myPOSDemoApp
 
         private void btnMotoPurchase_Click(object sender, EventArgs e)
         {
-            if (!ParseAmount() || !ParseCurrency() || !ParseMoTo())
+            double Tip = 0;
+            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+
+            if (!ParseAmount() || !ParseCurrency())
             {
                 MessageBox.Show("Invalid input");
             }
             else
             {
-                t.SetPassword(txtPassword.Text);
-                RequestResult r = t.MoToPurchase(Amount, cur, PAN, ExpiryDate, txtReference.Text);
+                RequestResult r = t.MoToPurchase(Amount, Tip, cur, PAN, ExpiryDate, (ReferenceNumberType)cmbReferenceType.SelectedItem, txtReferenceNumber.Text, txtOperatorCode.Text);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -492,7 +530,7 @@ namespace myPOSDemoApp
             else
             {
                 t.SetPassword(txtPassword.Text);
-                RequestResult r = t.MoToRefund(Amount, cur, PAN, ExpiryDate, txtReference.Text);
+                RequestResult r = t.MoToRefund(Amount, cur, PAN, ExpiryDate, String.Empty);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -507,14 +545,16 @@ namespace myPOSDemoApp
 
         private void btnMotoPreauth_Click(object sender, EventArgs e)
         {
-            if (!ParseAmount() || !ParseCurrency() || !ParseMoTo())
+            double Tip = 0;
+            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+
+            if (!ParseAmount() || !ParseCurrency())
             {
                 MessageBox.Show("Invalid input");
             }
             else
             {
-                t.SetPassword(txtPassword.Text);
-                RequestResult r = t.MoToPreauthorization(Amount, cur, PAN, ExpiryDate, txtReference.Text);
+                RequestResult r = t.MoToPreauthorization(Amount, Tip, cur, PAN, ExpiryDate, (ReferenceNumberType)cmbReferenceType.SelectedItem, txtReferenceNumber.Text);
                 switch (r)
                 {
                     case RequestResult.Busy:
@@ -602,36 +642,6 @@ namespace myPOSDemoApp
                     break;
                 default: break;
             }
-        }
-
-        private void btnBigPurchase_Click(object sender, EventArgs e)
-        {
-            double Tip = 0;
-            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
-
-
-            if (!ParseAmount() || !ParseCurrency())
-            {
-                MessageBox.Show("Invalid input");
-            }
-            else
-            {
-                RequestResult r = t.Purchase(Amount, Tip, cur, (ReferenceNumberType)cmbReferenceType.SelectedItem, txtReferenceNumber.Text, txtOperatorCode.Text);
-                switch (r)
-                {
-                    case RequestResult.Busy:
-                    case RequestResult.InvalidParams:
-                    case RequestResult.NotInitialized:
-                        MessageBox.Show("RequestResult: " + r.ToString());
-                        break;
-                    default: break;
-                }
-            }
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnPaymentRequest_Click(object sender, EventArgs e)
@@ -856,5 +866,284 @@ namespace myPOSDemoApp
 		{
 			t.PrintExternalUTF8(txtPrintData.Text);
 		}
+
+        private void VendingAutoCycle()
+        {
+            RequestResult r;
+            bVendingAutoCycleStopRequested = false;
+            semVendingAutoCycleWaitResult = new Semaphore(0, 1);
+
+            try
+            {
+                while (!bVendingAutoCycleStopRequested)
+                {
+                    r = t.VendingPurchase(Amount, cur, chkVendingShowAmount.Checked);
+                    switch (r)
+                    {
+                        case RequestResult.Busy:
+                        case RequestResult.InvalidParams:
+                        case RequestResult.NotInitialized:
+                            AddLog("RequestResult: " + r.ToString());
+                            break;
+                        default: break;
+                    }
+
+                    if (!semVendingAutoCycleWaitResult.WaitOne())
+                    {
+                        break;
+                    }
+
+                    if (!bVendingAutoCycleStopRequested)
+                    {
+                        semVendingAutoCycleWaitResult.WaitOne(5000);
+                    }
+
+                    if (chbVendingAutoCycleCompleteTransactions.Checked)
+                    {
+                        r = t.VendingComplete(Amount, cur);
+                        switch (r)
+                        {
+                            case RequestResult.Busy:
+                            case RequestResult.InvalidParams:
+                            case RequestResult.NotInitialized:
+                                AddLog("RequestResult: " + r.ToString());
+                                break;
+                            default: break;
+                        }
+                    }
+                    else
+                    {
+                        r = t.VendingCancel();
+                        switch (r)
+                        {
+                            case RequestResult.Busy:
+                            case RequestResult.InvalidParams:
+                            case RequestResult.NotInitialized:
+                                MessageBox.Show("RequestResult: " + r.ToString());
+                                break;
+                            default: break;
+                        }
+                    }
+
+                    if (!semVendingAutoCycleWaitResult.WaitOne())
+                    {
+                        break;
+                    }
+
+                    if (!bVendingAutoCycleStopRequested)
+                    {
+                        semVendingAutoCycleWaitResult.WaitOne(25000);
+                    }
+                }
+            }
+            finally
+            {
+                bVendingAutoCycleIsRunning = false;
+
+                if (btnVendingAutoCycle.InvokeRequired)
+                {
+                    btnVendingAutoCycle.Invoke(
+                        (MethodInvoker)delegate
+                        {
+                            btnVendingAutoCycle.Text = "Start Vending Autocycle";
+                        });
+                }
+                else
+                {
+                    btnVendingAutoCycle.Text = "Start Vending Autocycle";
+                }
+            }
+        }
+
+        private void btnVendingAutoCycle_Click(object sender, EventArgs e)
+        {
+            if (bVendingAutoCycleIsRunning)
+            {
+                btnVendingAutoCycle.Text = "Stopping ...";
+                bVendingAutoCycleStopRequested = true;
+
+                t.StopWaitingForCard();
+            }
+            else
+            {
+                if (!ParseAmount() || !ParseCurrency())
+                {
+                    AddLog("Invalid input");
+                    return;
+                }
+
+                bVendingAutoCycleIsRunning = true;
+                btnVendingAutoCycle.Text = "Stop Vending Autocycle";
+
+                thVendingAutoCycleThread = new Thread(VendingAutoCycle);
+                thVendingAutoCycleThread.Start();
+            }
+        }
+
+        private void btnDisplayText_Click(object sender, EventArgs e)
+        {
+            int Timeout = 0;            
+            
+            Int32.TryParse(txtDispalyTextTimeout.Text, out Timeout);
+
+            RequestResult r = t.DisplayTextOnScreen(Timeout
+                , txtDispalyTextRow1.Text, (DispalyTextRowAlign)cmbDispalyTextRow1Align.SelectedItem
+                , txtDispalyTextRow2.Text, (DispalyTextRowAlign)cmbDispalyTextRow2Align.SelectedItem
+                , txtDispalyTextRow3.Text, (DispalyTextRowAlign)cmbDispalyTextRow3Align.SelectedItem
+                , txtDispalyTextRow4.Text, (DispalyTextRowAlign)cmbDispalyTextRow4Align.SelectedItem
+                , txtDispalyTextRow5.Text, (DispalyTextRowAlign)cmbDispalyTextRow5Align.SelectedItem
+                );
+
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnHideText_Click(object sender, EventArgs e)
+        {
+            t.HideTextOnScreen();
+        }
+
+        private void btnIsWaitingForCard_Click(object sender, EventArgs e)
+        {
+            if (t.IsWaitingForCard())
+            {
+                AddLog("Is waiting for card");
+            }
+            else
+            {
+                AddLog("Not waiting for card");
+            }
+        }
+
+        private void btnPurchaseAutoCycle_Click(object sender, EventArgs e)
+        {
+            if (bVendingAutoCycleIsRunning)
+            {
+                btnPurchaseAutoCycle.Text = "Stopping ...";
+                bVendingAutoCycleStopRequested = true;
+
+                t.StopWaitingForCard();
+            }
+            else
+            {
+                if (!ParseAmount() || !ParseCurrency())
+                {
+                    AddLog("Invalid input");
+                    return;
+                }
+
+                bVendingAutoCycleIsRunning = true;
+                btnPurchaseAutoCycle.Text = "Stop Purchase Autocycle";
+
+                thVendingAutoCycleThread = new Thread(PurchaseAutoCycle);
+                thVendingAutoCycleThread.Start();
+            }
+        }
+
+        private void PurchaseAutoCycle()
+        {
+            RequestResult r;
+            bVendingAutoCycleStopRequested = false;
+            semVendingAutoCycleWaitResult = new Semaphore(0, 1);
+
+            double Tip = 0;
+            ReferenceNumberType refNumType = ReferenceNumberType.None;
+            string refNumValue = "";
+            string operCode = "";
+
+            if (cmbReferenceType.InvokeRequired)
+            {
+                cmbReferenceType.Invoke(
+                        (MethodInvoker)delegate
+                        {
+                            Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+                            refNumType = (ReferenceNumberType)cmbReferenceType.SelectedItem;
+                            refNumValue = txtReferenceNumber.Text;
+                            operCode = txtOperatorCode.Text;
+                        });
+            }
+            else
+            {
+                Double.TryParse(txtTipAmount.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out Tip);
+                refNumType = (ReferenceNumberType)cmbReferenceType.SelectedItem;
+                refNumValue = txtReferenceNumber.Text;
+                operCode = txtOperatorCode.Text;
+            }
+
+            try
+            {
+                while (!bVendingAutoCycleStopRequested)
+                {
+                    r = t.Purchase(Amount, Tip, cur, refNumType, refNumValue, operCode);
+                    switch (r)
+                    {
+                        case RequestResult.Busy:
+                        case RequestResult.InvalidParams:
+                        case RequestResult.NotInitialized:
+                            AddLog("RequestResult: " + r.ToString());
+                            break;
+                        case RequestResult.Processing:
+                            if (!semVendingAutoCycleWaitResult.WaitOne())
+                            {
+                                break;
+                            }
+                            break;
+                        default: break;
+                    }
+
+                    if (!bVendingAutoCycleStopRequested)
+                    {
+                        semVendingAutoCycleWaitResult.WaitOne(20000);
+                    }
+                }
+            }
+            finally
+            {
+                bVendingAutoCycleIsRunning = false;
+
+                if (btnPurchaseAutoCycle.InvokeRequired)
+                {
+                    btnPurchaseAutoCycle.Invoke(
+                        (MethodInvoker)delegate
+                        {
+                            btnPurchaseAutoCycle.Text = "Start Purchase Autocycle";
+                        });
+                }
+                else
+                {
+                    btnPurchaseAutoCycle.Text = "Start Purchase Autocycle";
+                }
+            }
+        }
+
+        private void btnTwintPurchase_Click(object sender, EventArgs e)
+        {
+
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+
+                RequestResult r = t.TwintPurchase(Amount, cur);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
     }
 }
