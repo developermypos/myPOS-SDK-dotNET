@@ -137,6 +137,22 @@
             this.btnHideText = new System.Windows.Forms.Button();
             this.btnPurchaseAutoCycle = new System.Windows.Forms.Button();
             this.btnTwintPurchase = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtTermIPHostname = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.txtTermTCPPort = new System.Windows.Forms.TextBox();
+            this.btnTerm_IP_TCP_Connect = new System.Windows.Forms.Button();
+            this.btnDisplayButtons = new System.Windows.Forms.Button();
+            this.label29 = new System.Windows.Forms.Label();
+            this.txtButtonText1 = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.txtButtonText2 = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.txtButtonText3 = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txtButtonText4 = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txtButtonText5 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cmbComPorts
@@ -178,7 +194,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(1758, 555);
+            this.txtLog.Size = new System.Drawing.Size(1751, 555);
             this.txtLog.TabIndex = 4;
             // 
             // btnAbort
@@ -326,7 +342,7 @@
             // txtPrintData
             // 
             this.txtPrintData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrintData.Location = new System.Drawing.Point(1521, 13);
+            this.txtPrintData.Location = new System.Drawing.Point(1514, 13);
             this.txtPrintData.Multiline = true;
             this.txtPrintData.Name = "txtPrintData";
             this.txtPrintData.Size = new System.Drawing.Size(249, 254);
@@ -336,7 +352,7 @@
             // btnPrintExternal
             // 
             this.btnPrintExternal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintExternal.Location = new System.Drawing.Point(1521, 273);
+            this.btnPrintExternal.Location = new System.Drawing.Point(1514, 273);
             this.btnPrintExternal.Name = "btnPrintExternal";
             this.btnPrintExternal.Size = new System.Drawing.Size(128, 23);
             this.btnPrintExternal.TabIndex = 24;
@@ -559,7 +575,7 @@
             this.btnPurchase.Name = "btnPurchase";
             this.btnPurchase.Size = new System.Drawing.Size(122, 23);
             this.btnPurchase.TabIndex = 31;
-            this.btnPurchase.Text = "Purcase";
+            this.btnPurchase.Text = "Purchase";
             this.btnPurchase.UseVisualStyleBackColor = true;
             this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
             // 
@@ -688,7 +704,7 @@
             // cmbLanguage
             // 
             this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(709, 56);
+            this.cmbLanguage.Location = new System.Drawing.Point(809, 58);
             this.cmbLanguage.Name = "cmbLanguage";
             this.cmbLanguage.Size = new System.Drawing.Size(160, 21);
             this.cmbLanguage.TabIndex = 32;
@@ -716,7 +732,7 @@
             // 
             // btnSendLog
             // 
-            this.btnSendLog.Location = new System.Drawing.Point(532, 8);
+            this.btnSendLog.Location = new System.Drawing.Point(681, 56);
             this.btnSendLog.Name = "btnSendLog";
             this.btnSendLog.Size = new System.Drawing.Size(100, 23);
             this.btnSendLog.TabIndex = 33;
@@ -747,7 +763,7 @@
             // btnClearLog
             // 
             this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearLog.Location = new System.Drawing.Point(1638, 384);
+            this.btnClearLog.Location = new System.Drawing.Point(1631, 384);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(132, 23);
             this.btnClearLog.TabIndex = 36;
@@ -761,7 +777,7 @@
             this.chkWriteLog.AutoSize = true;
             this.chkWriteLog.Checked = true;
             this.chkWriteLog.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkWriteLog.Location = new System.Drawing.Point(1669, 361);
+            this.chkWriteLog.Location = new System.Drawing.Point(1662, 361);
             this.chkWriteLog.Name = "chkWriteLog";
             this.chkWriteLog.Size = new System.Drawing.Size(101, 17);
             this.chkWriteLog.TabIndex = 37;
@@ -858,7 +874,7 @@
             // btnCheckForCRR
             // 
             this.btnCheckForCRR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckForCRR.Location = new System.Drawing.Point(1521, 303);
+            this.btnCheckForCRR.Location = new System.Drawing.Point(1514, 303);
             this.btnCheckForCRR.Name = "btnCheckForCRR";
             this.btnCheckForCRR.Size = new System.Drawing.Size(249, 23);
             this.btnCheckForCRR.TabIndex = 44;
@@ -889,7 +905,7 @@
             // btnPrintExternalUTF8
             // 
             this.btnPrintExternalUTF8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintExternalUTF8.Location = new System.Drawing.Point(1655, 273);
+            this.btnPrintExternalUTF8.Location = new System.Drawing.Point(1648, 273);
             this.btnPrintExternalUTF8.Name = "btnPrintExternalUTF8";
             this.btnPrintExternalUTF8.Size = new System.Drawing.Size(115, 23);
             this.btnPrintExternalUTF8.TabIndex = 24;
@@ -1074,7 +1090,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(1151, 239);
+            this.label27.Location = new System.Drawing.Point(1161, 368);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(45, 13);
             this.label27.TabIndex = 55;
@@ -1082,14 +1098,14 @@
             // 
             // txtDispalyTextTimeout
             // 
-            this.txtDispalyTextTimeout.Location = new System.Drawing.Point(1197, 236);
+            this.txtDispalyTextTimeout.Location = new System.Drawing.Point(1212, 367);
             this.txtDispalyTextTimeout.Name = "txtDispalyTextTimeout";
             this.txtDispalyTextTimeout.Size = new System.Drawing.Size(100, 20);
             this.txtDispalyTextTimeout.TabIndex = 56;
             // 
             // btnDisplayText
             // 
-            this.btnDisplayText.Location = new System.Drawing.Point(1260, 263);
+            this.btnDisplayText.Location = new System.Drawing.Point(1161, 395);
             this.btnDisplayText.Name = "btnDisplayText";
             this.btnDisplayText.Size = new System.Drawing.Size(137, 23);
             this.btnDisplayText.TabIndex = 57;
@@ -1109,7 +1125,7 @@
             // 
             // btnHideText
             // 
-            this.btnHideText.Location = new System.Drawing.Point(1260, 293);
+            this.btnHideText.Location = new System.Drawing.Point(1304, 395);
             this.btnHideText.Name = "btnHideText";
             this.btnHideText.Size = new System.Drawing.Size(137, 23);
             this.btnHideText.TabIndex = 59;
@@ -1137,11 +1153,161 @@
             this.btnTwintPurchase.UseVisualStyleBackColor = true;
             this.btnTwintPurchase.Click += new System.EventHandler(this.btnTwintPurchase_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(529, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 13);
+            this.label5.TabIndex = 62;
+            this.label5.Text = "IP / Hostname";
+            // 
+            // txtTermIPHostname
+            // 
+            this.txtTermIPHostname.Location = new System.Drawing.Point(621, 10);
+            this.txtTermIPHostname.Name = "txtTermIPHostname";
+            this.txtTermIPHostname.Size = new System.Drawing.Size(98, 20);
+            this.txtTermIPHostname.TabIndex = 63;
+            this.txtTermIPHostname.Text = "127.0.0.1";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(728, 13);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(26, 13);
+            this.label28.TabIndex = 64;
+            this.label28.Text = "Port";
+            // 
+            // txtTermTCPPort
+            // 
+            this.txtTermTCPPort.Location = new System.Drawing.Point(760, 10);
+            this.txtTermTCPPort.Name = "txtTermTCPPort";
+            this.txtTermTCPPort.Size = new System.Drawing.Size(50, 20);
+            this.txtTermTCPPort.TabIndex = 65;
+            this.txtTermTCPPort.Text = "60180";
+            // 
+            // btnTerm_IP_TCP_Connect
+            // 
+            this.btnTerm_IP_TCP_Connect.Location = new System.Drawing.Point(817, 8);
+            this.btnTerm_IP_TCP_Connect.Name = "btnTerm_IP_TCP_Connect";
+            this.btnTerm_IP_TCP_Connect.Size = new System.Drawing.Size(86, 23);
+            this.btnTerm_IP_TCP_Connect.TabIndex = 66;
+            this.btnTerm_IP_TCP_Connect.Text = "Connect";
+            this.btnTerm_IP_TCP_Connect.UseVisualStyleBackColor = true;
+            this.btnTerm_IP_TCP_Connect.Click += new System.EventHandler(this.btnTerm_IP_TCP_Connect_Click);
+            // 
+            // btnDisplayButtons
+            // 
+            this.btnDisplayButtons.Location = new System.Drawing.Point(1447, 395);
+            this.btnDisplayButtons.Name = "btnDisplayButtons";
+            this.btnDisplayButtons.Size = new System.Drawing.Size(137, 23);
+            this.btnDisplayButtons.TabIndex = 67;
+            this.btnDisplayButtons.Text = "Show Bittons";
+            this.btnDisplayButtons.UseVisualStyleBackColor = true;
+            this.btnDisplayButtons.Click += new System.EventHandler(this.btnDisplayButtons_Click);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(1158, 240);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(32, 13);
+            this.label29.TabIndex = 69;
+            this.label29.Text = "Btn 1";
+            // 
+            // txtButtonText1
+            // 
+            this.txtButtonText1.Location = new System.Drawing.Point(1197, 237);
+            this.txtButtonText1.Name = "txtButtonText1";
+            this.txtButtonText1.Size = new System.Drawing.Size(188, 20);
+            this.txtButtonText1.TabIndex = 68;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(1158, 266);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(32, 13);
+            this.label30.TabIndex = 71;
+            this.label30.Text = "Btn 2";
+            // 
+            // txtButtonText2
+            // 
+            this.txtButtonText2.Location = new System.Drawing.Point(1197, 263);
+            this.txtButtonText2.Name = "txtButtonText2";
+            this.txtButtonText2.Size = new System.Drawing.Size(188, 20);
+            this.txtButtonText2.TabIndex = 70;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(1158, 292);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(32, 13);
+            this.label31.TabIndex = 73;
+            this.label31.Text = "Btn 3";
+            // 
+            // txtButtonText3
+            // 
+            this.txtButtonText3.Location = new System.Drawing.Point(1197, 289);
+            this.txtButtonText3.Name = "txtButtonText3";
+            this.txtButtonText3.Size = new System.Drawing.Size(188, 20);
+            this.txtButtonText3.TabIndex = 72;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(1158, 318);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(32, 13);
+            this.label32.TabIndex = 75;
+            this.label32.Text = "Btn 4";
+            // 
+            // txtButtonText4
+            // 
+            this.txtButtonText4.Location = new System.Drawing.Point(1197, 315);
+            this.txtButtonText4.Name = "txtButtonText4";
+            this.txtButtonText4.Size = new System.Drawing.Size(188, 20);
+            this.txtButtonText4.TabIndex = 74;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(1158, 344);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(32, 13);
+            this.label33.TabIndex = 77;
+            this.label33.Text = "Btn 5";
+            // 
+            // txtButtonText5
+            // 
+            this.txtButtonText5.Location = new System.Drawing.Point(1197, 341);
+            this.txtButtonText5.Name = "txtButtonText5";
+            this.txtButtonText5.Size = new System.Drawing.Size(188, 20);
+            this.txtButtonText5.TabIndex = 76;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1782, 991);
+            this.ClientSize = new System.Drawing.Size(1775, 991);
+            this.Controls.Add(this.label33);
+            this.Controls.Add(this.txtButtonText5);
+            this.Controls.Add(this.label32);
+            this.Controls.Add(this.txtButtonText4);
+            this.Controls.Add(this.label31);
+            this.Controls.Add(this.txtButtonText3);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.txtButtonText2);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.txtButtonText1);
+            this.Controls.Add(this.btnDisplayButtons);
+            this.Controls.Add(this.btnTerm_IP_TCP_Connect);
+            this.Controls.Add(this.txtTermTCPPort);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.txtTermIPHostname);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnTwintPurchase);
             this.Controls.Add(this.btnPurchaseAutoCycle);
             this.Controls.Add(this.btnHideText);
@@ -1368,6 +1534,22 @@
         private System.Windows.Forms.Button btnHideText;
         private System.Windows.Forms.Button btnPurchaseAutoCycle;
         private System.Windows.Forms.Button btnTwintPurchase;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtTermIPHostname;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox txtTermTCPPort;
+        private System.Windows.Forms.Button btnTerm_IP_TCP_Connect;
+        private System.Windows.Forms.Button btnDisplayButtons;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox txtButtonText1;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox txtButtonText2;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox txtButtonText3;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtButtonText4;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox txtButtonText5;
     }
 }
 

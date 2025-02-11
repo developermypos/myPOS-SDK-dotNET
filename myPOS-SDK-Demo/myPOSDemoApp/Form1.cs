@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Net.Sockets;
 
 namespace myPOSDemoApp
 {
@@ -24,6 +25,9 @@ namespace myPOSDemoApp
         private bool bVendingAutoCycleStopRequested = false;
         private Thread thVendingAutoCycleThread;
         private Semaphore semVendingAutoCycleWaitResult;
+
+
+        TcpClient tcpClientTerminal = null;
 
 
         myPOSTerminal t = new myPOSTerminal();
@@ -92,7 +96,8 @@ namespace myPOSDemoApp
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("Processing \"{0}\" finished\r\n", r.Method.ToString());
-            sb.AppendFormat("Status: \"{0}\"\r\n", r.Status.ToString());
+            sb.AppendFormat("Request Status: \"{0}\"\r\n", r.CommunicationStatus.ToString());
+            sb.AppendFormat("Terminal Status: \"{0}\"\r\n", r.Status.ToString());
 
             if (r.TranData != null)
             {
@@ -283,6 +288,12 @@ namespace myPOSDemoApp
         private void btnDisconnect_Click(object sender, EventArgs e)
         {
             t.Disconnect();
+
+            if (tcpClientTerminal != null)
+            {
+                tcpClientTerminal.Close();
+                tcpClientTerminal = null;
+            }
         }
 
         private void btnAbort_Click(object sender, EventArgs e)
@@ -1010,6 +1021,34 @@ namespace myPOSDemoApp
             t.HideTextOnScreen();
         }
 
+        private void btnDisplayButtons_Click(object sender, EventArgs e)
+        {
+            int Timeout = 0;
+
+            Int32.TryParse(txtDispalyTextTimeout.Text, out Timeout);
+
+            RequestResult r = t.DisplayButtons(
+                 txtDispalyTextRow1.Text
+                , txtDispalyTextRow2.Text
+                , txtButtonText1.Text
+                , txtButtonText2.Text
+                , txtButtonText3.Text
+                , txtButtonText4.Text
+                , txtButtonText5.Text
+                , Timeout
+                );
+
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
         private void btnIsWaitingForCard_Click(object sender, EventArgs e)
         {
             if (t.IsWaitingForCard())
@@ -1143,6 +1182,36 @@ namespace myPOSDemoApp
                         break;
                     default: break;
                 }
+            }
+        }
+
+        private void btnTerm_IP_TCP_Connect_Click(object sender, EventArgs e)
+        {
+            Int32 port = 0;
+            Int32.TryParse(txtTermTCPPort.Text, out port);
+
+            if (txtTermIPHostname.Text == String.Empty)
+            {
+                MessageBox.Show("Empty address");
+                return;
+            }
+
+            if (port<=0 || port > UInt16.MaxValue)
+            {
+                MessageBox.Show("Invalid port");
+                return;
+            }
+
+            try
+            {
+                AddLog(String.Format("Trying to connect to [{0}:{1}]", txtTermIPHostname.Text, port));
+                tcpClientTerminal = new TcpClient(txtTermIPHostname.Text, port);
+                t.Initialize(tcpClientTerminal.GetStream());
+            }
+            catch (Exception ex) {
+                AddLog("[Exception] " + ex.Message);
+                MessageBox.Show("Connect not succesful");
+                return;
             }
         }
     }
