@@ -26,6 +26,12 @@ namespace myPOSDemoApp
         private Thread thVendingAutoCycleThread;
         private Semaphore semVendingAutoCycleWaitResult;
 
+        private bool bRebootAutoCycleIsRunning = false;
+        private bool bRebootAutoCycleStopRequested = false;
+        private Thread thRebootAutoCycleThread;
+        private Semaphore semRebootAutoCycleWaitResult;
+        string strRebootAutoCyclePort = "";
+
 
         TcpClient tcpClientTerminal = null;
 
@@ -135,7 +141,23 @@ namespace myPOSDemoApp
                 return;
             }
 
-            MessageBox.Show(sb.ToString());
+            if (bRebootAutoCycleIsRunning)
+            {
+                semRebootAutoCycleWaitResult.Release(1);
+                return;
+            }
+
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    MessageBox.Show(this, sb.ToString());
+                });
+            }
+            else
+            {
+                MessageBox.Show(this, sb.ToString());
+            }
         }
 
         delegate void AddLogDelegate(string msg);
@@ -1164,7 +1186,6 @@ namespace myPOSDemoApp
 
         private void btnTwintPurchase_Click(object sender, EventArgs e)
         {
-
             if (!ParseAmount() || !ParseCurrency())
             {
                 MessageBox.Show("Invalid input");
@@ -1182,6 +1203,56 @@ namespace myPOSDemoApp
                         break;
                     default: break;
                 }
+            }
+        }
+
+        private void btnTwintLastStatus_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.TwintLastStatus();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
+            }
+        }
+
+        private void btnSatispayPurchase_Click(object sender, EventArgs e)
+        {
+            if (!ParseAmount() || !ParseCurrency())
+            {
+                MessageBox.Show("Invalid input");
+            }
+            else
+            {
+
+                RequestResult r = t.SatispayPurchase(Amount, cur);
+                switch (r)
+                {
+                    case RequestResult.Busy:
+                    case RequestResult.InvalidParams:
+                    case RequestResult.NotInitialized:
+                        MessageBox.Show("RequestResult: " + r.ToString());
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void btnSatispayLastStatus_Click(object sender, EventArgs e)
+        {
+            RequestResult r = t.SatispayLastStatus();
+            switch (r)
+            {
+                case RequestResult.Busy:
+                case RequestResult.InvalidParams:
+                case RequestResult.NotInitialized:
+                    MessageBox.Show("RequestResult: " + r.ToString());
+                    break;
+                default: break;
             }
         }
 
@@ -1210,8 +1281,109 @@ namespace myPOSDemoApp
             }
             catch (Exception ex) {
                 AddLog("[Exception] " + ex.Message);
-                MessageBox.Show("Connect not succesful");
+                MessageBox.Show("Connect not successful");
                 return;
+            }
+        }
+
+        private void txtApplicationId_TextChanged(object sender, EventArgs e)
+        {
+            t.SetApplicationId(txtApplicationId.Text);
+        }
+
+        private void btnCycleReboots_Click(object sender, EventArgs e)
+        {
+            if (cmbComPorts.Text == String.Empty) return;
+            strRebootAutoCyclePort = cmbComPorts.Text;
+
+            if (bRebootAutoCycleIsRunning)
+            {
+                btnPurchaseAutoCycle.Text = "Stopping ...";
+                bRebootAutoCycleStopRequested = true;
+
+                t.StopWaitingForCard();
+            }
+            else
+            {
+
+                bRebootAutoCycleIsRunning = true;
+                btnPurchaseAutoCycle.Text = "Stop Purchase Autocycle";
+
+                thRebootAutoCycleThread = new Thread(RebootAutoCycle);
+                thRebootAutoCycleThread.Start();
+            }
+        }
+
+        private void RebootAutoCycle()
+        {
+            RequestResult r;
+            bRebootAutoCycleStopRequested = false;
+            semRebootAutoCycleWaitResult = new Semaphore(0, 1);
+
+            try
+            {
+                while (bRebootAutoCycleIsRunning)
+                {
+                    r = t.Initialize(strRebootAutoCyclePort);
+                    switch (r)
+                    {
+                        case RequestResult.Busy:
+                        case RequestResult.InvalidParams:
+                        case RequestResult.NotInitialized:
+                            AddLog("RequestResult: " + r.ToString());
+                            break;
+                        case RequestResult.Processing:
+                            semRebootAutoCycleWaitResult.WaitOne();
+                            r = RequestResult.Finished;
+                            break;
+                        default: break;
+                    }
+
+                    if (r == RequestResult.Finished)
+                    {
+                        r = t.Reboot();
+                        switch (r)
+                        {
+                            case RequestResult.Busy:
+                            case RequestResult.InvalidParams:
+                            case RequestResult.NotInitialized:
+                                AddLog("RequestResult: " + r.ToString());
+                                break;
+                            case RequestResult.Processing:
+                                semRebootAutoCycleWaitResult.WaitOne();
+                                break;
+                            default: break;
+                        }
+                    }
+
+                    t.Disconnect();
+
+                    for (int i = 0; i < 60; i++)
+                    {
+                        if (bRebootAutoCycleStopRequested)
+                        {
+                            break;
+                        }
+                        Thread.Sleep(1000);
+                    }
+                }
+            }
+            finally
+            {
+                bRebootAutoCycleIsRunning = false;
+
+                if (btnCycleReboots.InvokeRequired)
+                {
+                    btnCycleReboots.Invoke(
+                        (MethodInvoker)delegate
+                        {
+                            btnCycleReboots.Text = "Start Reboot Autocycle";
+                        });
+                }
+                else
+                {
+                    btnCycleReboots.Text = "Start Reboot Autocycle";
+                }
             }
         }
     }

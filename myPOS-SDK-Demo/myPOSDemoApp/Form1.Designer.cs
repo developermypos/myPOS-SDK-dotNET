@@ -153,6 +153,12 @@
             this.txtButtonText4 = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.txtButtonText5 = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.txtApplicationId = new System.Windows.Forms.TextBox();
+            this.btnCycleReboots = new System.Windows.Forms.Button();
+            this.btnTwintLastStatus = new System.Windows.Forms.Button();
+            this.btnSatispayPurchase = new System.Windows.Forms.Button();
+            this.btnSatispayLastStatus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbComPorts
@@ -440,9 +446,9 @@
             // 
             // btnMotoPurchase
             // 
-            this.btnMotoPurchase.Location = new System.Drawing.Point(504, 295);
+            this.btnMotoPurchase.Location = new System.Drawing.Point(456, 295);
             this.btnMotoPurchase.Name = "btnMotoPurchase";
-            this.btnMotoPurchase.Size = new System.Drawing.Size(149, 23);
+            this.btnMotoPurchase.Size = new System.Drawing.Size(117, 23);
             this.btnMotoPurchase.TabIndex = 28;
             this.btnMotoPurchase.Text = "Moto Purchase";
             this.btnMotoPurchase.UseVisualStyleBackColor = true;
@@ -450,9 +456,9 @@
             // 
             // btnMotoRefund
             // 
-            this.btnMotoRefund.Location = new System.Drawing.Point(504, 325);
+            this.btnMotoRefund.Location = new System.Drawing.Point(456, 325);
             this.btnMotoRefund.Name = "btnMotoRefund";
-            this.btnMotoRefund.Size = new System.Drawing.Size(149, 23);
+            this.btnMotoRefund.Size = new System.Drawing.Size(117, 23);
             this.btnMotoRefund.TabIndex = 28;
             this.btnMotoRefund.Text = "Moto Refund";
             this.btnMotoRefund.UseVisualStyleBackColor = true;
@@ -460,9 +466,9 @@
             // 
             // btnMotoPreauth
             // 
-            this.btnMotoPreauth.Location = new System.Drawing.Point(504, 354);
+            this.btnMotoPreauth.Location = new System.Drawing.Point(456, 354);
             this.btnMotoPreauth.Name = "btnMotoPreauth";
-            this.btnMotoPreauth.Size = new System.Drawing.Size(149, 23);
+            this.btnMotoPreauth.Size = new System.Drawing.Size(117, 23);
             this.btnMotoPreauth.TabIndex = 28;
             this.btnMotoPreauth.Text = "Moto Preauth";
             this.btnMotoPreauth.UseVisualStyleBackColor = true;
@@ -712,9 +718,9 @@
             // 
             // btnCheckCard
             // 
-            this.btnCheckCard.Location = new System.Drawing.Point(681, 295);
+            this.btnCheckCard.Location = new System.Drawing.Point(725, 295);
             this.btnCheckCard.Name = "btnCheckCard";
-            this.btnCheckCard.Size = new System.Drawing.Size(149, 23);
+            this.btnCheckCard.Size = new System.Drawing.Size(105, 23);
             this.btnCheckCard.TabIndex = 28;
             this.btnCheckCard.Text = "Check Card";
             this.btnCheckCard.UseVisualStyleBackColor = true;
@@ -722,9 +728,9 @@
             // 
             // btnOriginalCredit
             // 
-            this.btnOriginalCredit.Location = new System.Drawing.Point(681, 325);
+            this.btnOriginalCredit.Location = new System.Drawing.Point(725, 325);
             this.btnOriginalCredit.Name = "btnOriginalCredit";
-            this.btnOriginalCredit.Size = new System.Drawing.Size(149, 23);
+            this.btnOriginalCredit.Size = new System.Drawing.Size(105, 23);
             this.btnOriginalCredit.TabIndex = 28;
             this.btnOriginalCredit.Text = "Original Credit";
             this.btnOriginalCredit.UseVisualStyleBackColor = true;
@@ -894,9 +900,9 @@
             // 
             // btnCashAdvance
             // 
-            this.btnCashAdvance.Location = new System.Drawing.Point(681, 354);
+            this.btnCashAdvance.Location = new System.Drawing.Point(725, 354);
             this.btnCashAdvance.Name = "btnCashAdvance";
-            this.btnCashAdvance.Size = new System.Drawing.Size(149, 23);
+            this.btnCashAdvance.Size = new System.Drawing.Size(105, 23);
             this.btnCashAdvance.TabIndex = 46;
             this.btnCashAdvance.Text = "Cash Advance";
             this.btnCashAdvance.UseVisualStyleBackColor = true;
@@ -1145,9 +1151,9 @@
             // 
             // btnTwintPurchase
             // 
-            this.btnTwintPurchase.Location = new System.Drawing.Point(681, 384);
+            this.btnTwintPurchase.Location = new System.Drawing.Point(593, 295);
             this.btnTwintPurchase.Name = "btnTwintPurchase";
-            this.btnTwintPurchase.Size = new System.Drawing.Size(149, 23);
+            this.btnTwintPurchase.Size = new System.Drawing.Size(113, 23);
             this.btnTwintPurchase.TabIndex = 61;
             this.btnTwintPurchase.Text = "Twint Purchase";
             this.btnTwintPurchase.UseVisualStyleBackColor = true;
@@ -1203,7 +1209,7 @@
             this.btnDisplayButtons.Name = "btnDisplayButtons";
             this.btnDisplayButtons.Size = new System.Drawing.Size(137, 23);
             this.btnDisplayButtons.TabIndex = 67;
-            this.btnDisplayButtons.Text = "Show Bittons";
+            this.btnDisplayButtons.Text = "Show Buttons";
             this.btnDisplayButtons.UseVisualStyleBackColor = true;
             this.btnDisplayButtons.Click += new System.EventHandler(this.btnDisplayButtons_Click);
             // 
@@ -1287,11 +1293,73 @@
             this.txtButtonText5.Size = new System.Drawing.Size(188, 20);
             this.txtButtonText5.TabIndex = 76;
             // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(21, 239);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(71, 13);
+            this.label34.TabIndex = 78;
+            this.label34.Text = "Application Id";
+            // 
+            // txtApplicationId
+            // 
+            this.txtApplicationId.Location = new System.Drawing.Point(114, 236);
+            this.txtApplicationId.Name = "txtApplicationId";
+            this.txtApplicationId.Size = new System.Drawing.Size(164, 20);
+            this.txtApplicationId.TabIndex = 22;
+            this.txtApplicationId.TextChanged += new System.EventHandler(this.txtApplicationId_TextChanged);
+            // 
+            // btnCycleReboots
+            // 
+            this.btnCycleReboots.Location = new System.Drawing.Point(1088, 7);
+            this.btnCycleReboots.Name = "btnCycleReboots";
+            this.btnCycleReboots.Size = new System.Drawing.Size(151, 23);
+            this.btnCycleReboots.TabIndex = 79;
+            this.btnCycleReboots.Text = "Cycle reboots";
+            this.btnCycleReboots.UseVisualStyleBackColor = true;
+            this.btnCycleReboots.Click += new System.EventHandler(this.btnCycleReboots_Click);
+            // 
+            // btnTwintLastStatus
+            // 
+            this.btnTwintLastStatus.Location = new System.Drawing.Point(593, 325);
+            this.btnTwintLastStatus.Name = "btnTwintLastStatus";
+            this.btnTwintLastStatus.Size = new System.Drawing.Size(113, 23);
+            this.btnTwintLastStatus.TabIndex = 80;
+            this.btnTwintLastStatus.Text = "Twint Last Status";
+            this.btnTwintLastStatus.UseVisualStyleBackColor = true;
+            this.btnTwintLastStatus.Click += new System.EventHandler(this.btnTwintLastStatus_Click);
+            // 
+            // btnSatispayPurchase
+            // 
+            this.btnSatispayPurchase.Location = new System.Drawing.Point(593, 355);
+            this.btnSatispayPurchase.Name = "btnSatispayPurchase";
+            this.btnSatispayPurchase.Size = new System.Drawing.Size(113, 23);
+            this.btnSatispayPurchase.TabIndex = 81;
+            this.btnSatispayPurchase.Text = "Satispay Purchase";
+            this.btnSatispayPurchase.UseVisualStyleBackColor = true;
+            this.btnSatispayPurchase.Click += new System.EventHandler(this.btnSatispayPurchase_Click);
+            // 
+            // btnSatispayLastStatus
+            // 
+            this.btnSatispayLastStatus.Location = new System.Drawing.Point(593, 384);
+            this.btnSatispayLastStatus.Name = "btnSatispayLastStatus";
+            this.btnSatispayLastStatus.Size = new System.Drawing.Size(113, 23);
+            this.btnSatispayLastStatus.TabIndex = 82;
+            this.btnSatispayLastStatus.Text = "Satispay Last Status";
+            this.btnSatispayLastStatus.UseVisualStyleBackColor = true;
+            this.btnSatispayLastStatus.Click += new System.EventHandler(this.btnSatispayLastStatus_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1775, 991);
+            this.Controls.Add(this.btnSatispayLastStatus);
+            this.Controls.Add(this.btnSatispayPurchase);
+            this.Controls.Add(this.btnTwintLastStatus);
+            this.Controls.Add(this.btnCycleReboots);
+            this.Controls.Add(this.label34);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.txtButtonText5);
             this.Controls.Add(this.label32);
@@ -1388,6 +1456,7 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.txtPan);
             this.Controls.Add(this.label11);
+            this.Controls.Add(this.txtApplicationId);
             this.Controls.Add(this.txtPreauthCode);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -1550,6 +1619,12 @@
         private System.Windows.Forms.TextBox txtButtonText4;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.TextBox txtButtonText5;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox txtApplicationId;
+        private System.Windows.Forms.Button btnCycleReboots;
+        private System.Windows.Forms.Button btnTwintLastStatus;
+        private System.Windows.Forms.Button btnSatispayPurchase;
+        private System.Windows.Forms.Button btnSatispayLastStatus;
     }
 }
 
